@@ -40,7 +40,7 @@ replay_*.log
 *.jfr
 
 # compose
-
+src/main/fabric-resources/fabric.mod.json
 *.gradle
 *.properties
 gradle/wrapper

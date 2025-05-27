@@ -8,10 +8,9 @@
 		"Hainer"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/Hainer007/AchievementStyle"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/achievementstyle/icon.png",
 	"environment": "client",
 	"entrypoints": {
