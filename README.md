@@ -11,6 +11,6 @@ Client-side only — no server installation required.
 
 Screenshots:
 
-![{3C6F9D90-61C4-4031-99A1-E5B97659EACB}](https://github.com/user-attachments/assets/f21b5928-1674-4022-a503-1cf06884693f)
+![{3C6F9D90-61C4-4031-99A1-E5B97659EACB}](https://github.com/user-attachments/assets/94643d8b-8223-4dd0-8a3c-0c18c35dc903)
 
 ![{40246EC7-7C2C-46D8-BB3D-6B76A5168B65}](https://github.com/user-attachments/assets/d972f9ed-4b4c-4a21-8d8c-97ad13222dbb)
