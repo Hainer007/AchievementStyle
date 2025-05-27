@@ -1,4 +1,8 @@
 ![minecraft_title](https://github.com/user-attachments/assets/372e0187-94c1-43be-9434-e43d77cd4804)
+
+[![Modrinth](https://img.shields.io/badge/Modrinth-Visit-green?logo=modrinth&style=for-the-badge)](https://modrinth.com/mod/achievementstyle)
+
+
 This mod replaces Minecraft’s default advancement notifications with a cleaner, more modern design. Each advancement now appears as a sleek popup in the bottom-right corner of the screen, featuring the item's icon and the advancement title, along with smooth animations.
 
 Client-side only — no server installation required.
