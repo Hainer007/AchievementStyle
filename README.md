@@ -1,5 +1,7 @@
 ![minecraft_title](https://github.com/user-attachments/assets/372e0187-94c1-43be-9434-e43d77cd4804)
 
+You can download this mod on Modrinth
+
 [![Modrinth](https://img.shields.io/badge/Modrinth-Visit-green?logo=modrinth&style=for-the-badge)](https://modrinth.com/mod/achievementstyle)
 
 
