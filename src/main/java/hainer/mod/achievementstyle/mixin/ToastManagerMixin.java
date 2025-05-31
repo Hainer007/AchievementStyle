@@ -21,13 +21,13 @@ public class ToastManagerMixin {
                 AdvancementEntry advancementEntry =((IAdvancementToast)toast).advancement();
 
                 if (advancementEntry != null && advancementEntry.value().display().isPresent()) {
-                    // Show our custom Steam-style achievement
+                    
                     AchievementStyle.showAchievement(advancementEntry.value());
-                    // Cancel the vanilla toast
+                    
                     ci.cancel();
                 }
             } catch (Exception e) {
-                // If reflection fails, fall back to a generic achievement
+                
                 System.out.println("Reflection failed, showing generic achievement: " + e.getMessage());
                 AchievementStyle.showCustomAchievement(
                         net.minecraft.text.Text.literal("Achievement Unlocked!"),

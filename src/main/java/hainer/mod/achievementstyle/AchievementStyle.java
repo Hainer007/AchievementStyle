@@ -1,5 +1,6 @@
 package hainer.mod.achievementstyle;
 
+import hainer.mod.achievementstyle.config.AchievementConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -21,23 +22,20 @@ public class AchievementStyle implements ClientModInitializer {
 	public static final String MOD_ID = "achievementstyle";
 	private static final List<SteamAchievement> activeAchievements = new ArrayList<>();
 	private static final Map<Identifier, Boolean> completedAchievements = new HashMap<>();
-	private static final int ACHIEVEMENT_WIDTH = 170;
-	private static final int ACHIEVEMENT_HEIGHT = 40;
-	private static final int SLIDE_DURATION = 40;
-	private static final int DISPLAY_DURATION = 120;
-	private static final int VERTICAL_OFFSET = 25; // Відступ від низу екрану
 	private static int tickCounter = 0;
 
 	@Override
 	public void onInitializeClient() {
 		System.out.println("[" + MOD_ID + "] Steam Style Mod Client initializing...");
 
-		// Register HUD rendering
+		AchievementConfig.init();
+
+		
 		HudRenderCallback.EVENT.register((drawContext, renderTickCounter) -> {
-			renderAchievements(drawContext, 1.0f); // Use fixed tick delta for simplicity
+			renderAchievements(drawContext, 1.0f);
 		});
 
-		// Register tick handler
+		
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if (client.world != null) {
 				tickCounter++;
@@ -87,12 +85,13 @@ public class AchievementStyle implements ClientModInitializer {
 		MinecraftClient client = MinecraftClient.getInstance();
 		if (client.options.hudHidden || activeAchievements.isEmpty()) return;
 
+		AchievementConfig config = AchievementConfig.get();
 		int screenWidth = client.getWindow().getScaledWidth();
 		int screenHeight = client.getWindow().getScaledHeight();
 
 		for (int i = 0; i < activeAchievements.size(); i++) {
 			SteamAchievement achievement = activeAchievements.get(i);
-			int yOffset = i * (ACHIEVEMENT_HEIGHT + 5);
+			int yOffset = i * (config.achievementHeight + config.achievementSpacing);
 			renderSteamAchievement(context, achievement, screenWidth, screenHeight, yOffset, tickCounter, tickDelta);
 		}
 	}
@@ -100,59 +99,70 @@ public class AchievementStyle implements ClientModInitializer {
 	private static void renderSteamAchievement(DrawContext context, SteamAchievement achievement,
 											   int screenWidth, int screenHeight, int yOffset, int currentTick, float tickDelta) {
 
-		// Тепер досягнення з'являються вище - використовуємо VERTICAL_OFFSET
-		int baseY = screenHeight - ACHIEVEMENT_HEIGHT - VERTICAL_OFFSET - yOffset;
+		AchievementConfig config = AchievementConfig.get();
 
-		// Animation
+		int baseY = screenHeight - config.achievementHeight - config.verticalOffset - yOffset;
+
+		
 		float slideProgress = achievement.getSlideProgress(currentTick, tickDelta);
-		int x = (int) (screenWidth - (ACHIEVEMENT_WIDTH + 10) * slideProgress);
+		int x = (int) (screenWidth - (config.achievementWidth + 10) * slideProgress);
 		int y = baseY;
 
-		// Background (dark rectangle with Steam-style)
-		context.fill(x, y, x + ACHIEVEMENT_WIDTH, y + ACHIEVEMENT_HEIGHT, 0xE0000000);
+		
+		context.fill(x, y, x + config.achievementWidth, y + config.achievementHeight, config.backgroundColor);
 
-		// Border
-		context.drawBorder(x, y, ACHIEVEMENT_WIDTH, ACHIEVEMENT_HEIGHT, 0xFF4A90E2);
+		
+		int borderColorWithAlpha = 0xFF000000 | (config.borderColor & 0x00FFFFFF);
+		context.drawBorder(x, y, config.achievementWidth, config.achievementHeight, borderColorWithAlpha);
 
-		// Gradient for more Steam-like appearance
-		for (int i = 0; i < ACHIEVEMENT_HEIGHT; i++) {
-			int alpha = (int) (30 * (1.0f - (float) i / ACHIEVEMENT_HEIGHT));
-			int color = (alpha << 24) | 0x4A90E2;
-			context.fill(x + 1, y + i, x + ACHIEVEMENT_WIDTH - 1, y + i + 1, color);
+		
+		for (int i = 0; i < config.achievementHeight; i++) {
+			int alpha = (int) (30 * (1.0f - (float) i / config.achievementHeight));
+			int red = (config.borderColor >> 16) & 0xFF;
+			int green = (config.borderColor >> 8) & 0xFF;
+			int blue = config.borderColor & 0xFF;
+			int color = (alpha << 24) | (red << 16) | (green << 8) | blue;
+			context.fill(x + 1, y + i, x + config.achievementWidth - 1, y + i + 1, color);
 		}
 
-		// Item/block icon
+		
 		context.getMatrices().push();
 		context.getMatrices().translate(x + 6, y + 6, 0);
-		context.getMatrices().scale(1.5f, 1.5f, 1.0f);
+		float iconScale = Math.min(1.5f, (config.achievementHeight - 12) / 16.0f);
+		context.getMatrices().scale(iconScale, iconScale, 1.0f);
 		context.drawItem(achievement.icon, 0, 0);
 		context.getMatrices().pop();
 
-		// Achievement text
+		
 		MinecraftClient client = MinecraftClient.getInstance();
 
-		// Title
+		
+		int titleY = y + Math.max(6, (config.achievementHeight - 24) / 3);
 		context.drawTextWithShadow(client.textRenderer, achievement.title,
-				x + 32, y + 6, 0xFFFFFF);
+				x + 32, titleY, 0xFFFFFF);
 
-		// Description
+		
 		Text description = achievement.description;
-		if (description != null) {
-			// Trim text if too long
+		if (description != null && config.achievementHeight > 30) {
 			String descText = description.getString();
-			if (client.textRenderer.getWidth(descText) > ACHIEVEMENT_WIDTH - 40) {
-				descText = client.textRenderer.trimToWidth(descText, ACHIEVEMENT_WIDTH - 45) + "...";
+			if (client.textRenderer.getWidth(descText) > config.achievementWidth - 40) {
+				descText = client.textRenderer.trimToWidth(descText, config.achievementWidth - 45) + "...";
 			}
-			context.drawTextWithShadow(client.textRenderer, Text.literal(descText),
-					x + 32, y + 18, 0xCCCCCC);
+			int descY = titleY + 12;
+			if (descY + 9 <= y + config.achievementHeight - 3) {
+				context.drawTextWithShadow(client.textRenderer, Text.literal(descText),
+						x + 32, descY, 0xCCCCCC);
+			}
 		}
 
-		// Extra decoration (small shine effect)
-		long time = System.currentTimeMillis();
-		double shine = Math.sin(time * 0.01) * 0.3 + 0.7;
-		int shineAlpha = (int) (100 * shine);
-		context.fill(x + ACHIEVEMENT_WIDTH - 15, y + 3, x + ACHIEVEMENT_WIDTH - 3, y + 5,
-				(shineAlpha << 24) | 0xFFFFFF);
+		
+		if (config.enableShineEffect) {
+			long time = System.currentTimeMillis();
+			double shine = Math.sin(time * 0.01) * 0.3 + 0.7;
+			int shineAlpha = (int) (100 * shine);
+			context.fill(x + config.achievementWidth - 15, y + 3, x + config.achievementWidth - 3, y + 5,
+					(shineAlpha << 24) | 0xFFFFFF);
+		}
 	}
 
 	private static class SteamAchievement {
@@ -169,30 +179,28 @@ public class AchievementStyle implements ClientModInitializer {
 		}
 
 		public boolean shouldRemove(int currentTick) {
+			AchievementConfig config = AchievementConfig.get();
 			int elapsed = currentTick - startTick;
-			return elapsed > (SLIDE_DURATION + DISPLAY_DURATION + SLIDE_DURATION);
+			return elapsed > (config.slideDuration + config.displayDuration + config.slideDuration);
 		}
 
 		public float getSlideProgress(int currentTick, float tickDelta) {
+			AchievementConfig config = AchievementConfig.get();
 			float elapsed = (currentTick - startTick) + tickDelta;
 
-			if (elapsed < SLIDE_DURATION) {
-				// Smooth appearance animation with easing
-				float progress = elapsed / SLIDE_DURATION;
+			if (elapsed < config.slideDuration) {
+				float progress = elapsed / config.slideDuration;
 				return easeOutCubic(progress);
-			} else if (elapsed < SLIDE_DURATION + DISPLAY_DURATION) {
-				// Full display
+			} else if (elapsed < config.slideDuration + config.displayDuration) {
 				return 1.0f;
-			} else if (elapsed < SLIDE_DURATION + DISPLAY_DURATION + SLIDE_DURATION) {
-				// Smooth disappearance animation with easing
-				float slideOutProgress = (elapsed - SLIDE_DURATION - DISPLAY_DURATION) / SLIDE_DURATION;
+			} else if (elapsed < config.slideDuration + config.displayDuration + config.slideDuration) {
+				float slideOutProgress = (elapsed - config.slideDuration - config.displayDuration) / config.slideDuration;
 				return 1.0f - easeInCubic(slideOutProgress);
 			} else {
 				return 0.0f;
 			}
 		}
 
-		// Smooth animation functions
 		private float easeOutCubic(float t) {
 			return 1.0f - (float) Math.pow(1.0f - t, 3.0);
 		}

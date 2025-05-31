@@ -1,0 +1,29 @@
+{
+  "text.autoconfig.achievementstyle.title": "Konfiguracja stylu osiągnięć",
+
+  "text.autoconfig.achievementstyle.category.appearance": "Wygląd",
+  "text.autoconfig.achievementstyle.option.achievementWidth": "Szerokość powiadomienia",
+  "text.autoconfig.achievementstyle.option.achievementWidth.@Tooltip": "Szerokość powiadomień o osiągnięciach (100–300 pikseli)",
+  "text.autoconfig.achievementstyle.option.achievementHeight": "Wysokość powiadomienia",
+  "text.autoconfig.achievementstyle.option.achievementHeight.@Tooltip": "Wysokość powiadomień o osiągnięciach (20–80 pikseli)",
+  "text.autoconfig.achievementstyle.option.verticalOffset": "Pionowe przesunięcie",
+  "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Odległość od dołu ekranu (0–100 pikseli)",
+
+  "text.autoconfig.achievementstyle.category.animation": "Animacja",
+  "text.autoconfig.achievementstyle.option.slideDuration": "Czas animacji",
+  "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "Czas trwania animacji wysuwania w tickach (10–100)",
+  "text.autoconfig.achievementstyle.option.displayDuration": "Czas wyświetlania",
+  "text.autoconfig.achievementstyle.option.displayDuration.@Tooltip": "Jak długo powiadomienie będzie widoczne (60–300 ticków)",
+
+  "text.autoconfig.achievementstyle.category.style": "Styl",
+  "text.autoconfig.achievementstyle.option.backgroundColor": "Kolor tła",
+  "text.autoconfig.achievementstyle.option.backgroundColor.@Tooltip": "Kolor tła powiadomień",
+  "text.autoconfig.achievementstyle.option.borderColor": "Kolor obramowania",
+  "text.autoconfig.achievementstyle.option.borderColor.@Tooltip": "Kolor obramowania powiadomień",
+  "text.autoconfig.achievementstyle.option.enableShineEffect": "Efekt połysku",
+  "text.autoconfig.achievementstyle.option.enableShineEffect.@Tooltip": "Włącz animowany efekt połysku na powiadomieniach",
+
+  "text.autoconfig.achievementstyle.category.position": "Pozycja",
+  "text.autoconfig.achievementstyle.option.achievementSpacing": "Odstęp powiadomień",
+  "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Odstęp między powiadomieniami (0–10 pikseli)"
+}

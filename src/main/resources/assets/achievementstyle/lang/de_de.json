@@ -1,0 +1,29 @@
+{
+  "text.autoconfig.achievementstyle.title": "Erfolgsstil-Einstellungen",
+
+  "text.autoconfig.achievementstyle.category.appearance": "Erscheinungsbild",
+  "text.autoconfig.achievementstyle.option.achievementWidth": "Erfolgsbreite",
+  "text.autoconfig.achievementstyle.option.achievementWidth.@Tooltip": "Breite der Erfolgsmeldungen (100–300 Pixel)",
+  "text.autoconfig.achievementstyle.option.achievementHeight": "Erfolgshöhe",
+  "text.autoconfig.achievementstyle.option.achievementHeight.@Tooltip": "Höhe der Erfolgsmeldungen (20–80 Pixel)",
+  "text.autoconfig.achievementstyle.option.verticalOffset": "Vertikaler Versatz",
+  "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Abstand vom unteren Bildschirmrand (0–100 Pixel)",
+
+  "text.autoconfig.achievementstyle.category.animation": "Animation",
+  "text.autoconfig.achievementstyle.option.slideDuration": "Einblenddauer",
+  "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "Dauer der Einblendanimation in Ticks (10–100)",
+  "text.autoconfig.achievementstyle.option.displayDuration": "Anzeigedauer",
+  "text.autoconfig.achievementstyle.option.displayDuration.@Tooltip": "Wie lange der Erfolg sichtbar bleibt (60–300 Ticks)",
+
+  "text.autoconfig.achievementstyle.category.style": "Stil",
+  "text.autoconfig.achievementstyle.option.backgroundColor": "Hintergrundfarbe",
+  "text.autoconfig.achievementstyle.option.backgroundColor.@Tooltip": "Hintergrundfarbe der Erfolgsmeldungen",
+  "text.autoconfig.achievementstyle.option.borderColor": "Rahmenfarbe",
+  "text.autoconfig.achievementstyle.option.borderColor.@Tooltip": "Rahmenfarbe der Erfolgsmeldungen",
+  "text.autoconfig.achievementstyle.option.enableShineEffect": "Glanzeffekt aktivieren",
+  "text.autoconfig.achievementstyle.option.enableShineEffect.@Tooltip": "Aktiviere animierten Glanzeffekt bei Erfolgen",
+
+  "text.autoconfig.achievementstyle.category.position": "Position",
+  "text.autoconfig.achievementstyle.option.achievementSpacing": "Abstand zwischen Erfolgen",
+  "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Abstand zwischen mehreren Erfolgen (0–10 Pixel)"
+}
