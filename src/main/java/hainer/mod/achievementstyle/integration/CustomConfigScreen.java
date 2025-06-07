@@ -24,7 +24,7 @@ public class CustomConfigScreen {
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        
+
         ConfigCategory appearance = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.appearance"));
 
@@ -52,7 +52,7 @@ public class CustomConfigScreen {
                 .setSaveConsumer(value -> config.verticalOffset = value)
                 .build());
 
-        
+
         ConfigCategory animation = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.animation"));
 
@@ -72,7 +72,7 @@ public class CustomConfigScreen {
                 .setSaveConsumer(value -> config.displayDuration = value)
                 .build());
 
-        
+
         ConfigCategory style = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.style"));
 
@@ -84,7 +84,7 @@ public class CustomConfigScreen {
                 .setSaveConsumer(value -> config.backgroundColor = value)
                 .build());
 
-        
+
         style.addEntry(entryBuilder.startStrField(
                         Text.translatable("text.autoconfig.achievementstyle.option.borderColor"),
                         String.format("#%06X", config.borderColor & 0xFFFFFF))
@@ -92,11 +92,11 @@ public class CustomConfigScreen {
                 .setTooltip(Text.translatable("text.autoconfig.achievementstyle.option.borderColor.@Tooltip"))
                 .setSaveConsumer(value -> {
                     try {
-                        
+
                         String hex = value.startsWith("#") ? value.substring(1) : value;
                         config.borderColor = Integer.parseInt(hex, 16) & 0xFFFFFF;
                     } catch (NumberFormatException e) {
-                        config.borderColor = 0x4A90E2; 
+                        config.borderColor = 0x4A90E2;
                     }
                 })
                 .build());

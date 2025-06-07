@@ -11,7 +11,7 @@ public class AchievementConfig implements ConfigData {
 
     @Override
     public void validatePostLoad() throws ValidationException {
-        
+
         achievementWidth = Math.max(100, Math.min(300, achievementWidth));
         achievementHeight = Math.max(20, Math.min(80, achievementHeight));
         verticalOffset = Math.max(0, Math.min(100, verticalOffset));
@@ -19,13 +19,13 @@ public class AchievementConfig implements ConfigData {
         displayDuration = Math.max(60, Math.min(300, displayDuration));
         achievementSpacing = Math.max(0, Math.min(10, achievementSpacing));
 
-        
+
         if ((backgroundColor & 0xFF000000) == 0) {
-            backgroundColor |= 0xFF000000; 
+            backgroundColor |= 0xFF000000;
         }
 
-        
-        borderColor &= 0x00FFFFFF; 
+
+        borderColor &= 0x00FFFFFF;
     }
 
     @ConfigEntry.Category("appearance")
@@ -60,7 +60,7 @@ public class AchievementConfig implements ConfigData {
 
     @ConfigEntry.Category("style")
     @ConfigEntry.Gui.Tooltip
-    
+
     public int borderColor = 0x4A90E2;
 
     @ConfigEntry.Category("style")

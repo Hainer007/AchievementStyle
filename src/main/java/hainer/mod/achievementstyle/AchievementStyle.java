@@ -30,12 +30,12 @@ public class AchievementStyle implements ClientModInitializer {
 
 		AchievementConfig.init();
 
-		
+
 		HudRenderCallback.EVENT.register((drawContext, renderTickCounter) -> {
 			renderAchievements(drawContext, 1.0f);
 		});
 
-		
+
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if (client.world != null) {
 				tickCounter++;
@@ -103,19 +103,19 @@ public class AchievementStyle implements ClientModInitializer {
 
 		int baseY = screenHeight - config.achievementHeight - config.verticalOffset - yOffset;
 
-		
+
 		float slideProgress = achievement.getSlideProgress(currentTick, tickDelta);
 		int x = (int) (screenWidth - (config.achievementWidth + 10) * slideProgress);
 		int y = baseY;
 
-		
+
 		context.fill(x, y, x + config.achievementWidth, y + config.achievementHeight, config.backgroundColor);
 
-		
+
 		int borderColorWithAlpha = 0xFF000000 | (config.borderColor & 0x00FFFFFF);
 		context.drawBorder(x, y, config.achievementWidth, config.achievementHeight, borderColorWithAlpha);
 
-		
+
 		for (int i = 0; i < config.achievementHeight; i++) {
 			int alpha = (int) (30 * (1.0f - (float) i / config.achievementHeight));
 			int red = (config.borderColor >> 16) & 0xFF;
@@ -125,7 +125,7 @@ public class AchievementStyle implements ClientModInitializer {
 			context.fill(x + 1, y + i, x + config.achievementWidth - 1, y + i + 1, color);
 		}
 
-		
+
 		context.getMatrices().push();
 		context.getMatrices().translate(x + 6, y + 6, 0);
 		float iconScale = Math.min(1.5f, (config.achievementHeight - 12) / 16.0f);
@@ -133,15 +133,15 @@ public class AchievementStyle implements ClientModInitializer {
 		context.drawItem(achievement.icon, 0, 0);
 		context.getMatrices().pop();
 
-		
+
 		MinecraftClient client = MinecraftClient.getInstance();
 
-		
+
 		int titleY = y + Math.max(6, (config.achievementHeight - 24) / 3);
 		context.drawTextWithShadow(client.textRenderer, achievement.title,
 				x + 32, titleY, 0xFFFFFF);
 
-		
+
 		Text description = achievement.description;
 		if (description != null && config.achievementHeight > 30) {
 			String descText = description.getString();
@@ -155,7 +155,7 @@ public class AchievementStyle implements ClientModInitializer {
 			}
 		}
 
-		
+
 		if (config.enableShineEffect) {
 			long time = System.currentTimeMillis();
 			double shine = Math.sin(time * 0.01) * 0.3 + 0.7;
