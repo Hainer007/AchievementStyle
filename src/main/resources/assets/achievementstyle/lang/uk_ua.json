@@ -1,29 +1,42 @@
 {
-  "text.autoconfig.achievementstyle.title": "Налаштування Стилю Досягнень",
+  "text.autoconfig.achievementstyle.title": "Налаштування стилю досягнень",
 
   "text.autoconfig.achievementstyle.category.appearance": "Зовнішній вигляд",
-  "text.autoconfig.achievementstyle.option.achievementWidth": "Ширина досягнення",
-  "text.autoconfig.achievementstyle.option.achievementWidth.@Tooltip": "Ширина сповіщення про досягнення (100–300 пікселів)",
-  "text.autoconfig.achievementstyle.option.achievementHeight": "Висота досягнення",
-  "text.autoconfig.achievementstyle.option.achievementHeight.@Tooltip": "Висота сповіщення про досягнення (20–80 пікселів)",
-  "text.autoconfig.achievementstyle.option.verticalOffset": "Вертикальне зміщення",
-  "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Відстань від нижньої частини екрана (0–100 пікселів)",
-
   "text.autoconfig.achievementstyle.category.animation": "Анімація",
-  "text.autoconfig.achievementstyle.option.slideDuration": "Тривалість появи",
-  "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "Тривалість анімації появи в тиках (10–100)",
-  "text.autoconfig.achievementstyle.option.displayDuration": "Тривалість показу",
-  "text.autoconfig.achievementstyle.option.displayDuration.@Tooltip": "Як довго досягнення залишається видимим (60–300 тиків)",
-
   "text.autoconfig.achievementstyle.category.style": "Стиль",
-  "text.autoconfig.achievementstyle.option.backgroundColor": "Колір фону",
-  "text.autoconfig.achievementstyle.option.backgroundColor.@Tooltip": "Фоновий колір сповіщення про досягнення",
-  "text.autoconfig.achievementstyle.option.borderColor": "Колір рамки",
-  "text.autoconfig.achievementstyle.option.borderColor.@Tooltip": "Колір рамки сповіщення про досягнення",
-  "text.autoconfig.achievementstyle.option.enableShineEffect": "Увімкнути ефект блиску",
-  "text.autoconfig.achievementstyle.option.enableShineEffect.@Tooltip": "Увімкнути анімований ефект блиску на досягненнях",
-
   "text.autoconfig.achievementstyle.category.position": "Позиція",
-  "text.autoconfig.achievementstyle.option.achievementSpacing": "Відступ між досягненнями",
-  "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Відстань між кількома досягненнями (0–10 пікселів)"
+  "text.autoconfig.achievementstyle.category.sound": "Звук",
+
+  "text.autoconfig.achievementstyle.option.achievementWidth": "Ширина досягнення",
+  "text.autoconfig.achievementstyle.option.achievementWidth.@Tooltip": "Ширина сповіщення про досягнення",
+
+  "text.autoconfig.achievementstyle.option.achievementHeight": "Висота досягнення",
+  "text.autoconfig.achievementstyle.option.achievementHeight.@Tooltip": "Висота сповіщення про досягнення",
+
+  "text.autoconfig.achievementstyle.option.verticalOffset": "Вертикальне зміщення",
+  "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Відстань від нижньої частини екрана",
+
+  "text.autoconfig.achievementstyle.option.slideDuration": "Тривалість анімації",
+  "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "Скільки часу займає анімація ковзання (у тиках)",
+
+  "text.autoconfig.achievementstyle.option.displayDuration": "Тривалість показу",
+  "text.autoconfig.achievementstyle.option.displayDuration.@Tooltip": "Скільки часу досягнення залишається видимим (у тиках)",
+
+  "text.autoconfig.achievementstyle.option.backgroundColor": "Колір фону",
+  "text.autoconfig.achievementstyle.option.backgroundColor.@Tooltip": "Колір фону сповіщення про досягнення",
+
+  "text.autoconfig.achievementstyle.option.borderColor": "Колір рамки",
+  "text.autoconfig.achievementstyle.option.borderColor.@Tooltip": "Колір рамки (формат hex, наприклад #4A90E2)",
+
+  "text.autoconfig.achievementstyle.option.enableShineEffect": "Увімкнути ефект блиску",
+  "text.autoconfig.achievementstyle.option.enableShineEffect.@Tooltip": "Додає тонку анімацію блиску",
+
+  "text.autoconfig.achievementstyle.option.achievementSpacing": "Відстань між досягненнями",
+  "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Простір між кількома досягненнями",
+
+  "text.autoconfig.achievementstyle.option.soundEnabled": "Увімкнути звук",
+  "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Відтворювати звук при появі досягнення",
+
+  "text.autoconfig.achievementstyle.option.soundVolume": "Гучність звуку",
+  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Гучність звуку досягнення (0.0 - 1.0)"
 }

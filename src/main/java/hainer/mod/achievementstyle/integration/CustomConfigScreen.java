@@ -24,7 +24,7 @@ public class CustomConfigScreen {
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-
+        
         ConfigCategory appearance = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.appearance"));
 
@@ -52,7 +52,7 @@ public class CustomConfigScreen {
                 .setSaveConsumer(value -> config.verticalOffset = value)
                 .build());
 
-
+        
         ConfigCategory animation = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.animation"));
 
@@ -72,7 +72,7 @@ public class CustomConfigScreen {
                 .setSaveConsumer(value -> config.displayDuration = value)
                 .build());
 
-
+        
         ConfigCategory style = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.style"));
 
@@ -84,7 +84,6 @@ public class CustomConfigScreen {
                 .setSaveConsumer(value -> config.backgroundColor = value)
                 .build());
 
-
         style.addEntry(entryBuilder.startStrField(
                         Text.translatable("text.autoconfig.achievementstyle.option.borderColor"),
                         String.format("#%06X", config.borderColor & 0xFFFFFF))
@@ -92,7 +91,7 @@ public class CustomConfigScreen {
                 .setTooltip(Text.translatable("text.autoconfig.achievementstyle.option.borderColor.@Tooltip"))
                 .setSaveConsumer(value -> {
                     try {
-
+                        
                         String hex = value.startsWith("#") ? value.substring(1) : value;
                         config.borderColor = Integer.parseInt(hex, 16) & 0xFFFFFF;
                     } catch (NumberFormatException e) {
@@ -109,7 +108,7 @@ public class CustomConfigScreen {
                 .setSaveConsumer(value -> config.enableShineEffect = value)
                 .build());
 
-
+        
         ConfigCategory position = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.position"));
 
@@ -119,6 +118,28 @@ public class CustomConfigScreen {
                 .setDefaultValue(defaultConfig.achievementSpacing)
                 .setTooltip(Text.translatable("text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip"))
                 .setSaveConsumer(value -> config.achievementSpacing = value)
+                .build());
+
+        
+        ConfigCategory sound = builder.getOrCreateCategory(
+                Text.translatable("text.autoconfig.achievementstyle.category.sound"));
+
+        sound.addEntry(entryBuilder.startBooleanToggle(
+                        Text.translatable("text.autoconfig.achievementstyle.option.soundEnabled"),
+                        config.soundEnabled)
+                .setDefaultValue(defaultConfig.soundEnabled)
+                .setTooltip(Text.translatable("text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip"))
+                .setSaveConsumer(value -> config.soundEnabled = value)
+                .build());
+
+        sound.addEntry(entryBuilder.startFloatField(
+                        Text.translatable("text.autoconfig.achievementstyle.option.soundVolume"),
+                        config.soundVolume)
+                .setDefaultValue(defaultConfig.soundVolume)
+                .setMin(0.0f)
+                .setMax(1.0f)
+                .setTooltip(Text.translatable("text.autoconfig.achievementstyle.option.soundVolume.@Tooltip"))
+                .setSaveConsumer(value -> config.soundVolume = Math.max(0.0f, Math.min(1.0f, value)))
                 .build());
 
         return builder.build();

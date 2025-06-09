@@ -9,6 +9,9 @@ import net.minecraft.advancement.AdvancementDisplay;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -20,6 +23,11 @@ import java.util.Map;
 
 public class AchievementStyle implements ClientModInitializer {
 	public static final String MOD_ID = "achievementstyle";
+
+	
+	public static final Identifier ACHIEVEMENT_SOUND_ID = Identifier.of(MOD_ID, "achievement_unlock");
+	public static final SoundEvent ACHIEVEMENT_SOUND_EVENT = SoundEvent.of(ACHIEVEMENT_SOUND_ID);
+
 	private static final List<SteamAchievement> activeAchievements = new ArrayList<>();
 	private static final Map<Identifier, Boolean> completedAchievements = new HashMap<>();
 	private static int tickCounter = 0;
@@ -28,13 +36,14 @@ public class AchievementStyle implements ClientModInitializer {
 	public void onInitializeClient() {
 		System.out.println("[" + MOD_ID + "] Steam Style Mod Client initializing...");
 
-		AchievementConfig.init();
+		
+		Registry.register(Registries.SOUND_EVENT, ACHIEVEMENT_SOUND_ID, ACHIEVEMENT_SOUND_EVENT);
 
+		AchievementConfig.init();
 
 		HudRenderCallback.EVENT.register((drawContext, renderTickCounter) -> {
 			renderAchievements(drawContext, 1.0f);
 		});
-
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if (client.world != null) {
@@ -58,6 +67,10 @@ public class AchievementStyle implements ClientModInitializer {
 					tickCounter
 			);
 			activeAchievements.add(steamAchievement);
+
+			
+			playAchievementSound();
+
 			System.out.println("[" + MOD_ID + "] Added Steam achievement: " + display.getTitle().getString());
 		}
 	}
@@ -74,7 +87,21 @@ public class AchievementStyle implements ClientModInitializer {
 				tickCounter
 		);
 		activeAchievements.add(steamAchievement);
+
+		
+		playAchievementSound();
+
 		System.out.println("[" + MOD_ID + "] Added custom Steam achievement: " + title.getString());
+	}
+
+	private static void playAchievementSound() {
+		MinecraftClient client = MinecraftClient.getInstance();
+		if (client.player != null && client.world != null) {
+			AchievementConfig config = AchievementConfig.get();
+			if (config.soundEnabled) {
+				client.player.playSound(ACHIEVEMENT_SOUND_EVENT, config.soundVolume, 1.0f);
+			}
+		}
 	}
 
 	private static void updateAchievements() {
@@ -103,18 +130,14 @@ public class AchievementStyle implements ClientModInitializer {
 
 		int baseY = screenHeight - config.achievementHeight - config.verticalOffset - yOffset;
 
-
 		float slideProgress = achievement.getSlideProgress(currentTick, tickDelta);
 		int x = (int) (screenWidth - (config.achievementWidth + 10) * slideProgress);
 		int y = baseY;
 
-
 		context.fill(x, y, x + config.achievementWidth, y + config.achievementHeight, config.backgroundColor);
-
 
 		int borderColorWithAlpha = 0xFF000000 | (config.borderColor & 0x00FFFFFF);
 		context.drawBorder(x, y, config.achievementWidth, config.achievementHeight, borderColorWithAlpha);
-
 
 		for (int i = 0; i < config.achievementHeight; i++) {
 			int alpha = (int) (30 * (1.0f - (float) i / config.achievementHeight));
@@ -125,7 +148,6 @@ public class AchievementStyle implements ClientModInitializer {
 			context.fill(x + 1, y + i, x + config.achievementWidth - 1, y + i + 1, color);
 		}
 
-
 		context.getMatrices().push();
 		context.getMatrices().translate(x + 6, y + 6, 0);
 		float iconScale = Math.min(1.5f, (config.achievementHeight - 12) / 16.0f);
@@ -133,14 +155,11 @@ public class AchievementStyle implements ClientModInitializer {
 		context.drawItem(achievement.icon, 0, 0);
 		context.getMatrices().pop();
 
-
 		MinecraftClient client = MinecraftClient.getInstance();
-
 
 		int titleY = y + Math.max(6, (config.achievementHeight - 24) / 3);
 		context.drawTextWithShadow(client.textRenderer, achievement.title,
 				x + 32, titleY, 0xFFFFFF);
-
 
 		Text description = achievement.description;
 		if (description != null && config.achievementHeight > 30) {
@@ -154,7 +173,6 @@ public class AchievementStyle implements ClientModInitializer {
 						x + 32, descY, 0xCCCCCC);
 			}
 		}
-
 
 		if (config.enableShineEffect) {
 			long time = System.currentTimeMillis();

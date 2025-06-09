@@ -2,28 +2,41 @@
   "text.autoconfig.achievementstyle.title": "Achievement Style Config",
 
   "text.autoconfig.achievementstyle.category.appearance": "Appearance",
-  "text.autoconfig.achievementstyle.option.achievementWidth": "Achievement Width",
-  "text.autoconfig.achievementstyle.option.achievementWidth.@Tooltip": "Width of achievement notifications (100-300 pixels)",
-  "text.autoconfig.achievementstyle.option.achievementHeight": "Achievement Height",
-  "text.autoconfig.achievementstyle.option.achievementHeight.@Tooltip": "Height of achievement notifications (20-80 pixels)",
-  "text.autoconfig.achievementstyle.option.verticalOffset": "Vertical Offset",
-  "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Distance from bottom of screen (0-100 pixels)",
-
   "text.autoconfig.achievementstyle.category.animation": "Animation",
-  "text.autoconfig.achievementstyle.option.slideDuration": "Slide Duration",
-  "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "Duration of slide animation in ticks (10-100)",
-  "text.autoconfig.achievementstyle.option.displayDuration": "Display Duration",
-  "text.autoconfig.achievementstyle.option.displayDuration.@Tooltip": "How long achievement stays visible in ticks (60-300)",
-
   "text.autoconfig.achievementstyle.category.style": "Style",
-  "text.autoconfig.achievementstyle.option.backgroundColor": "Background Color",
-  "text.autoconfig.achievementstyle.option.backgroundColor.@Tooltip": "Background color of achievement notifications",
-  "text.autoconfig.achievementstyle.option.borderColor": "Border Color",
-  "text.autoconfig.achievementstyle.option.borderColor.@Tooltip": "Border color of achievement notifications",
-  "text.autoconfig.achievementstyle.option.enableShineEffect": "Enable Shine Effect",
-  "text.autoconfig.achievementstyle.option.enableShineEffect.@Tooltip": "Enable animated shine effect on achievements",
-
   "text.autoconfig.achievementstyle.category.position": "Position",
+  "text.autoconfig.achievementstyle.category.sound": "Sound",
+
+  "text.autoconfig.achievementstyle.option.achievementWidth": "Achievement Width",
+  "text.autoconfig.achievementstyle.option.achievementWidth.@Tooltip": "Width of achievement notification",
+
+  "text.autoconfig.achievementstyle.option.achievementHeight": "Achievement Height",
+  "text.autoconfig.achievementstyle.option.achievementHeight.@Tooltip": "Height of achievement notification",
+
+  "text.autoconfig.achievementstyle.option.verticalOffset": "Vertical Offset",
+  "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Distance from bottom of screen",
+
+  "text.autoconfig.achievementstyle.option.slideDuration": "Slide Duration",
+  "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "How long the slide animation takes (in ticks)",
+
+  "text.autoconfig.achievementstyle.option.displayDuration": "Display Duration",
+  "text.autoconfig.achievementstyle.option.displayDuration.@Tooltip": "How long achievement stays visible (in ticks)",
+
+  "text.autoconfig.achievementstyle.option.backgroundColor": "Background Color",
+  "text.autoconfig.achievementstyle.option.backgroundColor.@Tooltip": "Background color of achievement notification",
+
+  "text.autoconfig.achievementstyle.option.borderColor": "Border Color",
+  "text.autoconfig.achievementstyle.option.borderColor.@Tooltip": "Border color (hex format, e.g. #4A90E2)",
+
+  "text.autoconfig.achievementstyle.option.enableShineEffect": "Enable Shine Effect",
+  "text.autoconfig.achievementstyle.option.enableShineEffect.@Tooltip": "Adds a subtle shine animation",
+
   "text.autoconfig.achievementstyle.option.achievementSpacing": "Achievement Spacing",
-  "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Space between multiple achievements (0-10 pixels)"
+  "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Space between multiple achievements",
+
+  "text.autoconfig.achievementstyle.option.soundEnabled": "Enable Sound",
+  "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Play sound when achievement appears",
+
+  "text.autoconfig.achievementstyle.option.soundVolume": "Sound Volume",
+  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Volume of achievement sound (0.0 - 1.0)"
 }

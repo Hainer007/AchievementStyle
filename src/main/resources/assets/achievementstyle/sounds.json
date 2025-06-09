@@ -1,0 +1,12 @@
+{
+  "achievement_unlock": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "achievementstyle:achievement_unlock",
+        "volume": 0.8,
+        "pitch": 1.0
+      }
+    ]
+  }
+}
