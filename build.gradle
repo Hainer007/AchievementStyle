@@ -1,0 +1,30 @@
+// Налаштування для показу детальних помилок
+gradle.projectsEvaluated {
+	tasks.withType(JavaCompile) {
+		options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+	}
+}
+
+allprojects {
+	repositories {
+		mavenCentral()
+		maven {
+			name = "Fabric"
+			url = "https://maven.fabricmc.net/"
+		}
+
+		maven {
+			name = "ParchmentMC"
+			url = "https://maven.parchmentmc.org"
+		}
+	}
+
+	// Показувати стек-трейс при помилках
+	tasks.withType(Test) {
+		testLogging {
+			events "passed", "skipped", "failed"
+			exceptionFormat "full"
+			showStandardStreams = true
+		}
+	}
+}

@@ -38,9 +38,3 @@ hs_err_*.log
 replay_*.log
 *.hprof
 *.jfr
-
-# compose
-src/main/resources/fabric.mod.json
-*.gradle
-*.properties
-gradle/wrapper
