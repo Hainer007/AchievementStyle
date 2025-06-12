@@ -1,9 +1,9 @@
 pluginManagement {
 	repositories {
-		maven {
-			name = 'Fabric'
-			url = 'https://maven.fabricmc.net/'
-		}
+		// Forge
+		maven { url = 'https://maven.minecraftforge.net/' }
+		// Fabric
+		maven { name = 'Fabric'; url = 'https://maven.fabricmc.net/' }
 		mavenCentral()
 		gradlePluginPortal()
 	}
@@ -12,3 +12,4 @@ pluginManagement {
 rootProject.name = 'AchievementStyle'
 
 include 'fabric'
+include 'forge'
