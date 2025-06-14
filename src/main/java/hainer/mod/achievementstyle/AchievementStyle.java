@@ -52,36 +52,36 @@ public class AchievementStyle implements ClientModInitializer {
 		System.out.println("[" + MOD_ID + "] Steam Style Achievements initializing...");
 
 		try {
-			// Реєструємо звуковий ефект
+			
 			Registry.register(Registries.SOUND_EVENT, ACHIEVEMENT_SOUND_ID, ACHIEVEMENT_SOUND_EVENT);
 
-			// Ініціалізуємо конфігурацію
+			
 			AchievementConfig.init();
 
-			// Реєструємо обробник тиків
+			
 			ClientTickEvents.END_CLIENT_TICK.register(client -> {
 				if (client.player != null && client.world != null) {
 					tick();
 
-					// Даємо час світу завантажитися перед ініціалізацією
+					
 					if (!initialized) {
 						initializationDelay++;
-						if (initializationDelay > 100) { // 5 секунд після spawn
+						if (initializationDelay > 100) { 
 							initializeAchievementStates(client);
 						}
 					}
 
-					// Видаляємо vanilla toast'и
+					
 					totalToastAnnihilation(client);
 
-					// Перевіряємо нові досягнення кожні 5 тиків
+					
 					if (initialized && tickCounter % 5 == 0) {
 						checkAchievements(client);
 					}
 				}
 			});
 
-			// Реєструємо відображення HUD
+			
 			HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
 				MinecraftClient mc = MinecraftClient.getInstance();
 				if (mc.player != null && mc.world != null) {
@@ -89,7 +89,7 @@ public class AchievementStyle implements ClientModInitializer {
 				}
 			});
 
-			// Очищаємо при з'єднанні з новим світом
+			
 			ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
 				activeAchievements.clear();
 				achievementStates.clear();
@@ -104,7 +104,7 @@ public class AchievementStyle implements ClientModInitializer {
 		}
 	}
 
-	// Видалення vanilla toast'ів
+	
 	private static void totalToastAnnihilation(MinecraftClient client) {
 		try {
 			ToastManager toastManager = client.getToastManager();
@@ -114,7 +114,7 @@ public class AchievementStyle implements ClientModInitializer {
 			replaceAdvancementToasts(toastManager);
 
 		} catch (Exception e) {
-			// Ігноруємо всі помилки
+			
 		}
 	}
 
@@ -154,13 +154,13 @@ public class AchievementStyle implements ClientModInitializer {
 							}
 						}
 					} catch (Exception e) {
-						// Ігноруємо помилки конкретних полів
+						
 					}
 				}
 				currentClass = currentClass.getSuperclass();
 			}
 		} catch (Exception e) {
-			// Ігноруємо загальні помилки
+			
 		}
 	}
 
@@ -192,11 +192,11 @@ public class AchievementStyle implements ClientModInitializer {
 						}
 					}
 				} catch (Exception e) {
-					// Ігноруємо помилки методів
+					
 				}
 			}
 		} catch (Exception e) {
-			// Ігноруємо загальні помилки
+			
 		}
 	}
 
@@ -226,11 +226,11 @@ public class AchievementStyle implements ClientModInitializer {
 						}
 					}
 				} catch (Exception e) {
-					// Ігноруємо помилки
+					
 				}
 			}
 		} catch (Exception e) {
-			// Ігноруємо загальні помилки
+			
 		}
 	}
 
@@ -324,7 +324,7 @@ public class AchievementStyle implements ClientModInitializer {
 				}
 			}
 		} catch (Exception e) {
-			// Ігноруємо помилки
+			
 		}
 		return null;
 	}
@@ -429,14 +429,14 @@ public class AchievementStyle implements ClientModInitializer {
 			int x = (int) (screenWidth - (config.achievementWidth + 10) * slideProgress);
 			int y = baseY;
 
-			// Фон
+			
 			context.fill(x, y, x + config.achievementWidth, y + config.achievementHeight, config.backgroundColor);
 
-			// Рамка
+			
 			int borderColorWithAlpha = 0xFF000000 | (config.borderColor & 0x00FFFFFF);
 			context.drawBorder(x, y, config.achievementWidth, config.achievementHeight, borderColorWithAlpha);
 
-			// Градієнтний ефект
+			
 			for (int i = 0; i < config.achievementHeight; i++) {
 				int alpha = (int) (30 * (1.0f - (float) i / config.achievementHeight));
 				int red = (config.borderColor >> 16) & 0xFF;
@@ -446,7 +446,7 @@ public class AchievementStyle implements ClientModInitializer {
 				context.fill(x + 1, y + i, x + config.achievementWidth - 1, y + i + 1, color);
 			}
 
-			// Іконка
+			
 			context.getMatrices().push();
 			context.getMatrices().translate(x + 6, y + 6, 0);
 			float iconScale = Math.min(1.5f, (config.achievementHeight - 12) / 16.0f);
@@ -456,12 +456,12 @@ public class AchievementStyle implements ClientModInitializer {
 
 			MinecraftClient client = MinecraftClient.getInstance();
 
-			// Заголовок
+			
 			int titleY = y + Math.max(6, (config.achievementHeight - 24) / 3);
 			context.drawTextWithShadow(client.textRenderer, achievement.title,
 					x + 32, titleY, 0xFFFFFF);
 
-			// Опис
+			
 			Text description = achievement.description;
 			if (description != null && config.achievementHeight > 30) {
 				String descText = description.getString();
@@ -475,7 +475,7 @@ public class AchievementStyle implements ClientModInitializer {
 				}
 			}
 
-			// Ефект блиску
+			
 			if (config.enableShineEffect) {
 				long time = System.currentTimeMillis();
 				double shine = Math.sin(time * 0.01) * 0.3 + 0.7;

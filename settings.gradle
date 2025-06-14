@@ -1,6 +1,6 @@
 pluginManagement {
 	repositories {
-		// Завантаження плагіна loom
+		
 		maven { name = "Fabric"; url = "https://maven.fabricmc.net/" }
 		gradlePluginPortal()
 		mavenCentral()
