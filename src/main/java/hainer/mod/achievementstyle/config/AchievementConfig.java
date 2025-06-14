@@ -9,9 +9,10 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 @Config(name = "achievementstyle")
 public class AchievementConfig implements ConfigData {
 
+
     @Override
     public void validatePostLoad() throws ValidationException {
-        
+
         achievementWidth = Math.max(100, Math.min(300, achievementWidth));
         achievementHeight = Math.max(20, Math.min(80, achievementHeight));
         verticalOffset = Math.max(0, Math.min(100, verticalOffset));
@@ -19,15 +20,15 @@ public class AchievementConfig implements ConfigData {
         displayDuration = Math.max(60, Math.min(300, displayDuration));
         achievementSpacing = Math.max(0, Math.min(10, achievementSpacing));
 
-        
+
         soundVolume = Math.max(0.0f, Math.min(1.0f, soundVolume));
 
-        
+
         if ((backgroundColor & 0xFF000000) == 0) {
             backgroundColor |= 0xFF000000;
         }
 
-        
+
         borderColor &= 0x00FFFFFF;
     }
 
@@ -74,7 +75,7 @@ public class AchievementConfig implements ConfigData {
     @ConfigEntry.BoundedDiscrete(min = 0, max = 10)
     public int achievementSpacing = 5;
 
-    
+
     @ConfigEntry.Category("sound")
     @ConfigEntry.Gui.Tooltip
     public boolean soundEnabled = true;

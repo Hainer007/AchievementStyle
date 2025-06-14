@@ -24,7 +24,7 @@ public class CustomConfigScreen {
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        
+
         ConfigCategory appearance = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.appearance"));
 
@@ -52,7 +52,7 @@ public class CustomConfigScreen {
                 .setSaveConsumer(value -> config.verticalOffset = value)
                 .build());
 
-        
+
         ConfigCategory animation = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.animation"));
 
@@ -72,7 +72,7 @@ public class CustomConfigScreen {
                 .setSaveConsumer(value -> config.displayDuration = value)
                 .build());
 
-        
+
         ConfigCategory style = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.style"));
 
@@ -91,7 +91,7 @@ public class CustomConfigScreen {
                 .setTooltip(Text.translatable("text.autoconfig.achievementstyle.option.borderColor.@Tooltip"))
                 .setSaveConsumer(value -> {
                     try {
-                        
+
                         String hex = value.startsWith("#") ? value.substring(1) : value;
                         config.borderColor = Integer.parseInt(hex, 16) & 0xFFFFFF;
                     } catch (NumberFormatException e) {
@@ -108,7 +108,7 @@ public class CustomConfigScreen {
                 .setSaveConsumer(value -> config.enableShineEffect = value)
                 .build());
 
-        
+
         ConfigCategory position = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.position"));
 
@@ -120,7 +120,7 @@ public class CustomConfigScreen {
                 .setSaveConsumer(value -> config.achievementSpacing = value)
                 .build());
 
-        
+
         ConfigCategory sound = builder.getOrCreateCategory(
                 Text.translatable("text.autoconfig.achievementstyle.category.sound"));
 
