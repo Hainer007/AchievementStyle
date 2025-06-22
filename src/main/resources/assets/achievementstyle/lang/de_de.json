@@ -1,0 +1,42 @@
+{
+  "text.autoconfig.achievementstyle.title": "Erfolgs-Stil Konfiguration",
+
+  "text.autoconfig.achievementstyle.category.appearance": "Erscheinungsbild",
+  "text.autoconfig.achievementstyle.category.animation": "Animation",
+  "text.autoconfig.achievementstyle.category.style": "Stil",
+  "text.autoconfig.achievementstyle.category.position": "Position",
+  "text.autoconfig.achievementstyle.category.sound": "Ton",
+
+  "text.autoconfig.achievementstyle.option.achievementWidth": "Erfolgs-Breite",
+  "text.autoconfig.achievementstyle.option.achievementWidth.@Tooltip": "Breite der Erfolgs-Benachrichtigung",
+
+  "text.autoconfig.achievementstyle.option.achievementHeight": "Erfolgs-Höhe",
+  "text.autoconfig.achievementstyle.option.achievementHeight.@Tooltip": "Höhe der Erfolgs-Benachrichtigung",
+
+  "text.autoconfig.achievementstyle.option.verticalOffset": "Vertikaler Versatz",
+  "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Abstand vom unteren Bildschirmrand",
+
+  "text.autoconfig.achievementstyle.option.slideDuration": "Gleit-Dauer",
+  "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "Wie lange die Gleit-Animation dauert (in Ticks)",
+
+  "text.autoconfig.achievementstyle.option.displayDuration": "Anzeigedauer",
+  "text.autoconfig.achievementstyle.option.displayDuration.@Tooltip": "Wie lange der Erfolg sichtbar bleibt (in Ticks)",
+
+  "text.autoconfig.achievementstyle.option.backgroundColor": "Hintergrundfarbe",
+  "text.autoconfig.achievementstyle.option.backgroundColor.@Tooltip": "Hintergrundfarbe der Erfolgs-Benachrichtigung",
+
+  "text.autoconfig.achievementstyle.option.borderColor": "Rahmenfarbe",
+  "text.autoconfig.achievementstyle.option.borderColor.@Tooltip": "Rahmenfarbe (Hex-Format, z.B. #4A90E2)",
+
+  "text.autoconfig.achievementstyle.option.enableShineEffect": "Glanz-Effekt aktivieren",
+  "text.autoconfig.achievementstyle.option.enableShineEffect.@Tooltip": "Fügt eine subtile Glanz-Animation hinzu",
+
+  "text.autoconfig.achievementstyle.option.achievementSpacing": "Erfolgs-Abstand",
+  "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Platz zwischen mehreren Erfolgen",
+
+  "text.autoconfig.achievementstyle.option.soundEnabled": "Ton aktivieren",
+  "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Ton abspielen, wenn Erfolg erscheint",
+
+  "text.autoconfig.achievementstyle.option.soundVolume": "Ton-Lautstärke",
+  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Lautstärke des Erfolgs-Tons (0.0 - 1.0)"
+}
