@@ -38,5 +38,16 @@
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Odtwarzaj dźwięk gdy pojawi się osiągnięcie",
 
   "text.autoconfig.achievementstyle.option.soundVolume": "Głośność dźwięku",
-  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Głośność dźwięku osiągnięcia (0.0 - 1.0)"
+  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Głośność dźwięku osiągnięcia (0.0 - 1.0)",
+
+  "text.autoconfig.achievementstyle.category.appearance.tooltip": "Dostosuj wygląd wizualny powiadomień o osiągnięciach",
+  "text.autoconfig.achievementstyle.category.animation.tooltip": "Skonfiguruj czas i zachowanie animacji",
+  "text.autoconfig.achievementstyle.category.style.tooltip": "Dostosuj kolory, efekty i styl wizualny",
+  "text.autoconfig.achievementstyle.category.position.tooltip": "Kontroluj pozycjonowanie i odstępy osiągnięć",
+  "text.autoconfig.achievementstyle.category.sound.tooltip": "Skonfiguruj efekty dźwiękowe i ustawienia głośności",
+
+  "key.achievementstyle.config": "Otwórz konfigurację stylu osiągnięć",
+  "key.achievementstyle.test": "Pokaż testowe osiągnięcie",
+  "category.achievementstyle.keybindings": "Styl osiągnięć"
+
 }

@@ -1,93 +1,209 @@
 package hainer.mod.achievementstyle.config;
 
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
+import dev.isxander.yacl3.api.*;
+import dev.isxander.yacl3.api.controller.*;
+import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
-@Config(name = "achievementstyle")
-public class AchievementConfig implements ConfigData {
+import java.awt.*;
 
-    @Override
-    public void validatePostLoad() throws ValidationException {
+public class AchievementConfig {
 
-        achievementWidth = Math.max(100, Math.min(300, achievementWidth));
-        achievementHeight = Math.max(20, Math.min(80, achievementHeight));
-        verticalOffset = Math.max(0, Math.min(100, verticalOffset));
-        slideDuration = Math.max(10, Math.min(100, slideDuration));
-        displayDuration = Math.max(60, Math.min(300, displayDuration));
-        achievementSpacing = Math.max(0, Math.min(10, achievementSpacing));
+    public static final ConfigClassHandler<AchievementConfig> HANDLER = ConfigClassHandler.createBuilder(AchievementConfig.class)
+            .id(Identifier.of("achievementstyle", "config"))
+            .serializer(config -> GsonConfigSerializerBuilder.create(config)
+                    .setPath(FabricLoader.getInstance().getConfigDir().resolve("achievementstyle.json5"))
+                    .build())
+            .build();
 
-
-        soundVolume = Math.max(0.0f, Math.min(1.0f, soundVolume));
-
-
-        if ((backgroundColor & 0xFF000000) == 0) {
-            backgroundColor |= 0xFF000000;
-        }
-
-
-        borderColor &= 0x00FFFFFF;
-    }
-
-    @ConfigEntry.Category("appearance")
-    @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.BoundedDiscrete(min = 100, max = 300)
+    // Appearance settings
+    @SerialEntry
     public int achievementWidth = 170;
 
-    @ConfigEntry.Category("appearance")
-    @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.BoundedDiscrete(min = 20, max = 80)
+    @SerialEntry
     public int achievementHeight = 40;
 
-    @ConfigEntry.Category("appearance")
-    @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
+    @SerialEntry
     public int verticalOffset = 25;
 
-    @ConfigEntry.Category("animation")
-    @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.BoundedDiscrete(min = 10, max = 100)
+    // Animation settings
+    @SerialEntry
     public int slideDuration = 40;
 
-    @ConfigEntry.Category("animation")
-    @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.BoundedDiscrete(min = 60, max = 300)
+    @SerialEntry
     public int displayDuration = 120;
 
-    @ConfigEntry.Category("style")
-    @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.ColorPicker(allowAlpha = true)
+    // Style settings
+    @SerialEntry
     public int backgroundColor = 0xE0000000;
 
-    @ConfigEntry.Category("style")
-    @ConfigEntry.Gui.Tooltip
+    @SerialEntry
     public int borderColor = 0x4A90E2;
 
-    @ConfigEntry.Category("style")
-    @ConfigEntry.Gui.Tooltip
+    @SerialEntry
     public boolean enableShineEffect = true;
 
-    @ConfigEntry.Category("position")
-    @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 10)
+    // Position settings
+    @SerialEntry
     public int achievementSpacing = 5;
 
-
-    @ConfigEntry.Category("sound")
-    @ConfigEntry.Gui.Tooltip
+    // Sound settings
+    @SerialEntry
     public boolean soundEnabled = true;
 
-    @ConfigEntry.Category("sound")
-    @ConfigEntry.Gui.Tooltip
+    @SerialEntry
     public float soundVolume = 0.8f;
 
     public static AchievementConfig get() {
-        return AutoConfig.getConfigHolder(AchievementConfig.class).getConfig();
+        return HANDLER.instance();
     }
 
     public static void init() {
-        AutoConfig.register(AchievementConfig.class, GsonConfigSerializer::new);
+        HANDLER.load();
+    }
+
+    public static Screen createConfigScreen(Screen parent) {
+        AchievementConfig config = get();
+        AchievementConfig defaults = new AchievementConfig();
+
+        return YetAnotherConfigLib.createBuilder()
+                .title(Text.translatable("text.autoconfig.achievementstyle.title"))
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("text.autoconfig.achievementstyle.category.appearance"))
+                        .tooltip(Text.translatable("text.autoconfig.achievementstyle.category.appearance.tooltip"))
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.translatable("text.autoconfig.achievementstyle.category.appearance"))
+                                .collapsed(false)
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.achievementWidth"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.achievementWidth.@Tooltip")))
+                                        .binding(defaults.achievementWidth, () -> config.achievementWidth, value -> config.achievementWidth = value)
+                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                                .range(100, 300)
+                                                .step(1))
+                                        .build())
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.achievementHeight"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.achievementHeight.@Tooltip")))
+                                        .binding(defaults.achievementHeight, () -> config.achievementHeight, value -> config.achievementHeight = value)
+                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                                .range(20, 80)
+                                                .step(1))
+                                        .build())
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.verticalOffset"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip")))
+                                        .binding(defaults.verticalOffset, () -> config.verticalOffset, value -> config.verticalOffset = value)
+                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                                .range(0, 100)
+                                                .step(1))
+                                        .build())
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("text.autoconfig.achievementstyle.category.animation"))
+                        .tooltip(Text.translatable("text.autoconfig.achievementstyle.category.animation.tooltip"))
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.translatable("text.autoconfig.achievementstyle.category.animation"))
+                                .collapsed(false)
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.slideDuration"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.slideDuration.@Tooltip")))
+                                        .binding(defaults.slideDuration, () -> config.slideDuration, value -> config.slideDuration = value)
+                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                                .range(10, 100)
+                                                .step(1))
+                                        .build())
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.displayDuration"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.displayDuration.@Tooltip")))
+                                        .binding(defaults.displayDuration, () -> config.displayDuration, value -> config.displayDuration = value)
+                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                                .range(60, 300)
+                                                .step(1))
+                                        .build())
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("text.autoconfig.achievementstyle.category.style"))
+                        .tooltip(Text.translatable("text.autoconfig.achievementstyle.category.style.tooltip"))
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.translatable("text.autoconfig.achievementstyle.category.style"))
+                                .collapsed(false)
+                                .option(Option.<Color>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.backgroundColor"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.backgroundColor.@Tooltip")))
+                                        .binding(new Color(defaults.backgroundColor, true),
+                                                () -> new Color(config.backgroundColor, true),
+                                                value -> config.backgroundColor = value.getRGB())
+                                        .controller(opt -> ColorControllerBuilder.create(opt)
+                                                .allowAlpha(true))
+                                        .build())
+                                .option(Option.<Color>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.borderColor"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.borderColor.@Tooltip")))
+                                        .binding(new Color(defaults.borderColor),
+                                                () -> new Color(config.borderColor),
+                                                value -> config.borderColor = value.getRGB() & 0xFFFFFF)
+                                        .controller(ColorControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.enableShineEffect"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.enableShineEffect.@Tooltip")))
+                                        .binding(defaults.enableShineEffect, () -> config.enableShineEffect, value -> config.enableShineEffect = value)
+                                        .controller(opt -> BooleanControllerBuilder.create(opt)
+                                                .yesNoFormatter()
+                                                .coloured(true))
+                                        .build())
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("text.autoconfig.achievementstyle.category.position"))
+                        .tooltip(Text.translatable("text.autoconfig.achievementstyle.category.position.tooltip"))
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.translatable("text.autoconfig.achievementstyle.category.position"))
+                                .collapsed(false)
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.achievementSpacing"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip")))
+                                        .binding(defaults.achievementSpacing, () -> config.achievementSpacing, value -> config.achievementSpacing = value)
+                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                                .range(0, 10)
+                                                .step(1))
+                                        .build())
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("text.autoconfig.achievementstyle.category.sound"))
+                        .tooltip(Text.translatable("text.autoconfig.achievementstyle.category.sound.tooltip"))
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.translatable("text.autoconfig.achievementstyle.category.sound"))
+                                .collapsed(false)
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.soundEnabled"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip")))
+                                        .binding(defaults.soundEnabled, () -> config.soundEnabled, value -> config.soundEnabled = value)
+                                        .controller(opt -> BooleanControllerBuilder.create(opt)
+                                                .yesNoFormatter()
+                                                .coloured(true))
+                                        .build())
+                                .option(Option.<Float>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.soundVolume"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.soundVolume.@Tooltip")))
+                                        .binding(defaults.soundVolume, () -> config.soundVolume, value -> config.soundVolume = value)
+                                        .controller(opt -> FloatSliderControllerBuilder.create(opt)
+                                                .range(0.0f, 1.0f)
+                                                .step(0.01f))
+                                        .build())
+                                .build())
+                        .build())
+                .save(HANDLER::save)
+                .build()
+                .generateScreen(parent);
     }
 }

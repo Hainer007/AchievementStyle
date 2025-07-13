@@ -38,5 +38,16 @@
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Ton abspielen, wenn Erfolg erscheint",
 
   "text.autoconfig.achievementstyle.option.soundVolume": "Ton-Lautstärke",
-  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Lautstärke des Erfolgs-Tons (0.0 - 1.0)"
+  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Lautstärke des Erfolgs-Tons (0.0 - 1.0)",
+
+  "text.autoconfig.achievementstyle.category.appearance.tooltip": "Passen Sie das Aussehen der Erfolgsmeldungen an",
+  "text.autoconfig.achievementstyle.category.animation.tooltip": "Konfigurieren Sie das Animationsverhalten und Timing",
+  "text.autoconfig.achievementstyle.category.style.tooltip": "Passen Sie Farben, Effekte und Stil an",
+  "text.autoconfig.achievementstyle.category.position.tooltip": "Steuern Sie Position und Abstand der Erfolge",
+  "text.autoconfig.achievementstyle.category.sound.tooltip": "Konfigurieren Sie Soundeffekte und Lautstärkeeinstellungen",
+
+  "key.achievementstyle.config": "Erfolg-Stil-Konfiguration öffnen",
+  "key.achievementstyle.test": "Test-Erfolg anzeigen",
+  "category.achievementstyle.keybindings": "Erfolg-Stil"
+
 }

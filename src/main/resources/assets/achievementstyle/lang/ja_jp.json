@@ -38,5 +38,16 @@
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "実績が表示されたときにサウンドを再生",
 
   "text.autoconfig.achievementstyle.option.soundVolume": "サウンド音量",
-  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "実績サウンドの音量（0.0 - 1.0）"
+  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "実績サウンドの音量（0.0 - 1.0）",
+
+  "text.autoconfig.achievementstyle.category.appearance.tooltip": "実績通知の外観をカスタマイズします",
+  "text.autoconfig.achievementstyle.category.animation.tooltip": "アニメーションのタイミングと動作を設定します",
+  "text.autoconfig.achievementstyle.category.style.tooltip": "色、エフェクト、スタイルを調整します",
+  "text.autoconfig.achievementstyle.category.position.tooltip": "実績の表示位置と間隔を調整します",
+  "text.autoconfig.achievementstyle.category.sound.tooltip": "効果音と音量の設定を行います",
+
+  "key.achievementstyle.config": "実績スタイル設定を開く",
+  "key.achievementstyle.test": "テスト実績を表示",
+  "category.achievementstyle.keybindings": "実績スタイル"
+
 }

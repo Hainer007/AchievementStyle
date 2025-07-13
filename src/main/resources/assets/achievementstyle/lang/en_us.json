@@ -38,5 +38,15 @@
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Play sound when achievement appears",
 
   "text.autoconfig.achievementstyle.option.soundVolume": "Sound Volume",
-  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Volume of achievement sound (0.0 - 1.0)"
+  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Volume of achievement sound (0.0 - 1.0)",
+
+  "text.autoconfig.achievementstyle.category.appearance.tooltip": "Customize the visual appearance of achievement notifications",
+  "text.autoconfig.achievementstyle.category.animation.tooltip": "Configure animation timing and behavior",
+  "text.autoconfig.achievementstyle.category.style.tooltip": "Adjust colors, effects, and visual styling",
+  "text.autoconfig.achievementstyle.category.position.tooltip": "Control positioning and spacing of achievements",
+  "text.autoconfig.achievementstyle.category.sound.tooltip": "Configure sound effects and volume settings",
+
+  "key.achievementstyle.config": "Open Achievement Style Config",
+  "key.achievementstyle.test": "Show Test Achievement",
+  "category.achievementstyle.keybindings": "Achievement Style"
 }

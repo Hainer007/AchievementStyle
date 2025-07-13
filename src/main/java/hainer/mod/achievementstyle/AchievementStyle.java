@@ -1,6 +1,7 @@
 package hainer.mod.achievementstyle;
 
 import hainer.mod.achievementstyle.config.AchievementConfig;
+import hainer.mod.achievementstyle.keybindings.KeyBindings;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -40,6 +41,12 @@ public class AchievementStyle implements ClientModInitializer {
 		Registry.register(Registries.SOUND_EVENT, ACHIEVEMENT_SOUND_ID, ACHIEVEMENT_SOUND_EVENT);
 
 		AchievementConfig.init();
+		// Initialize AchievementConfig
+		AchievementConfig.init();
+
+		// Register KeyBindings
+		KeyBindings.register();
+
 
 		HudRenderCallback.EVENT.register((drawContext, renderTickCounter) -> {
 			renderAchievements(drawContext, 1.0f);
@@ -52,7 +59,7 @@ public class AchievementStyle implements ClientModInitializer {
 			}
 		});
 
-		System.out.println("[" + MOD_ID + "] Steam Style Mod Client initialized successfully!");
+		System.out.println("[" + MOD_ID + "] AchievementStyle Mod initialized successfully!");
 	}
 
 	public static void showAchievement(Advancement advancement) {
@@ -91,7 +98,7 @@ public class AchievementStyle implements ClientModInitializer {
 
 		playAchievementSound();
 
-		System.out.println("[" + MOD_ID + "] Added custom Steam achievement: " + title.getString());
+		System.out.println("[" + MOD_ID + "] Added custom AchievementStyle achievement: " + title.getString());
 	}
 
 	private static void playAchievementSound() {

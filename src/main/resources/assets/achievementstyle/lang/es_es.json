@@ -38,5 +38,16 @@
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Reproducir sonido cuando aparece el logro",
 
   "text.autoconfig.achievementstyle.option.soundVolume": "Volumen del sonido",
-  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Volumen del sonido de logro (0.0 - 1.0)"
+  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Volumen del sonido de logro (0.0 - 1.0)",
+
+  "text.autoconfig.achievementstyle.category.appearance.tooltip": "Personaliza la apariencia visual de las notificaciones de logros",
+  "text.autoconfig.achievementstyle.category.animation.tooltip": "Configura el tiempo y comportamiento de la animación",
+  "text.autoconfig.achievementstyle.category.style.tooltip": "Ajusta colores, efectos y estilo visual",
+  "text.autoconfig.achievementstyle.category.position.tooltip": "Controla la posición y el espaciado de los logros",
+  "text.autoconfig.achievementstyle.category.sound.tooltip": "Configura efectos de sonido y ajustes de volumen",
+
+  "key.achievementstyle.config": "Abrir configuración de estilo de logros",
+  "key.achievementstyle.test": "Mostrar logro de prueba",
+  "category.achievementstyle.keybindings": "Estilo de logros"
+
 }

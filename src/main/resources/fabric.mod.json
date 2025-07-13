@@ -31,6 +31,6 @@
 		"fabric-api": "*",
 		"minecraft": ">=1.21.6 <1.22",
 		"java": ">=21",
-		"cloth-config": ">=13.0.0"
+		"yet_another_config_lib_v3": ">=3.7.1+1.21.6-fabric"
 	}
 }

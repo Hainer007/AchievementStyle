@@ -38,5 +38,16 @@
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Відтворювати звук при появі досягнення",
 
   "text.autoconfig.achievementstyle.option.soundVolume": "Гучність звуку",
-  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Гучність звуку досягнення (0.0 - 1.0)"
+  "text.autoconfig.achievementstyle.option.soundVolume.@Tooltip": "Гучність звуку досягнення (0.0 - 1.0)",
+
+  "text.autoconfig.achievementstyle.category.appearance.tooltip": "Налаштуйте зовнішній вигляд сповіщень про досягнення",
+  "text.autoconfig.achievementstyle.category.animation.tooltip": "Налаштуйте час і поведінку анімації",
+  "text.autoconfig.achievementstyle.category.style.tooltip": "Змініть кольори, ефекти та стиль відображення",
+  "text.autoconfig.achievementstyle.category.position.tooltip": "Керуйте позиціонуванням та відстанню між досягненнями",
+  "text.autoconfig.achievementstyle.category.sound.tooltip": "Налаштуйте звукові ефекти та рівень гучності",
+
+  "key.achievementstyle.config": "Відкрити налаштування стилю досягнень",
+  "key.achievementstyle.test": "Показати тестове досягнення",
+  "category.achievementstyle.keybindings": "Стиль досягнень"
+
 }
