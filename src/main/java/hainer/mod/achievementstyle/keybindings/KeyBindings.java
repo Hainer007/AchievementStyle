@@ -19,25 +19,25 @@ public class KeyBindings {
     private static boolean wasTestPressed = false;
 
     public static void register() {
-        // Створюємо клавішу для відкриття конфігурації
+        // Create the key binding for opening the configuration
         configKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.achievementstyle.config", // Ключ для локалізації
+                "key.achievementstyle.config", // Localization key
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_I, // Клавіша I
-                "category.achievementstyle.keybindings" // Категорія в налаштуваннях
+                GLFW.GLFW_KEY_I, // Key I
+                "category.achievementstyle.keybindings" // Category in settings
         ));
 
-        // Створюємо клавішу для тестової ачівки
+        // Create the key binding for showing a test achievement
         testAchievementKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.achievementstyle.test", // Ключ для локалізації
+                "key.achievementstyle.test", // Localization key
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
-                "category.achievementstyle.keybindings" // Категорія в налаштуваннях
+                "category.achievementstyle.keybindings" // Category in settings
         ));
 
-        // Реєструємо обробник подій клавіш
+        // Register the key event handler
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            // Обробка клавіші конфігурації
+            // Handle config key press
             if (configKeyBinding.wasPressed() && !wasConfigPressed) {
                 wasConfigPressed = true;
                 openConfigScreen();
@@ -45,7 +45,7 @@ public class KeyBindings {
                 wasConfigPressed = false;
             }
 
-            // Обробка клавіші тестової ачівки
+            // Handle test achievement key press
             if (testAchievementKeyBinding.wasPressed() && !wasTestPressed) {
                 wasTestPressed = true;
                 showTestAchievement();
@@ -65,12 +65,12 @@ public class KeyBindings {
     private static void showTestAchievement() {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player != null) {
-            // Створюємо тестову ачівку
+            // Create a test achievement
             Text title = Text.literal("Test Achievement");
-            Text description = Text.literal("This is a test achievement triggered by pressing K!");
-            ItemStack icon = new ItemStack(Items.DIAMOND); // Використовуємо алмаз як іконку
+            Text description = Text.literal("This is a test achievement!");
+            ItemStack icon = new ItemStack(Items.DIAMOND); // Use diamond as the icon
 
-            // Викликаємо метод для показу кастомної ачівки
+            // Call the method to show a custom achievement
             AchievementStyle.showCustomAchievement(title, description, icon);
         }
     }
