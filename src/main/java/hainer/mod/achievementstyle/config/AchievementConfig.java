@@ -52,6 +52,12 @@ public class AchievementConfig {
     @SerialEntry
     public int achievementSpacing = 5;
 
+    @SerialEntry
+    public int positionX = -1; // -1 means auto (right side)
+
+    @SerialEntry
+    public int positionY = -1; // -1 means auto (bottom)
+
     // Sound settings
     @SerialEntry
     public boolean soundEnabled = true;
@@ -175,6 +181,24 @@ public class AchievementConfig {
                                         .controller(opt -> IntegerSliderControllerBuilder.create(opt)
                                                 .range(0, 10)
                                                 .step(1))
+                                        .build())
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.positionX"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.positionX.@Tooltip")))
+                                        .binding(defaults.positionX, () -> config.positionX, value -> config.positionX = value)
+                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                                .range(-1, 100)
+                                                .step(1)
+                                                .formatValue(value -> value == -1 ? Text.translatable("text.autoconfig.achievementstyle.option.positionX.auto") : Text.literal(value + "%")))
+                                        .build())
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.positionY"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.positionY.@Tooltip")))
+                                        .binding(defaults.positionY, () -> config.positionY, value -> config.positionY = value)
+                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                                .range(-1, 100)
+                                                .step(1)
+                                                .formatValue(value -> value == -1 ? Text.translatable("text.autoconfig.achievementstyle.option.positionY.auto") : Text.literal(value + "%")))
                                         .build())
                                 .build())
                         .build())

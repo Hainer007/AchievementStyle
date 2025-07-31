@@ -135,11 +135,48 @@ public class AchievementStyle implements ClientModInitializer {
 
 		AchievementConfig config = AchievementConfig.get();
 
-		int baseY = screenHeight - config.achievementHeight - config.verticalOffset - yOffset;
+		// Calculate actual positions based on percentage
+		int actualX, actualY;
+
+		if (config.positionX == -1) {
+			// Auto X positioning - right side
+			actualX = screenWidth - config.achievementWidth - 10;
+		} else {
+			// Convert percentage to actual position
+			actualX = (int) ((config.positionX / 100.0f) * (screenWidth - config.achievementWidth));
+		}
+
+		if (config.positionY == -1) {
+			// Auto Y positioning - bottom with offset
+			actualY = screenHeight - config.achievementHeight - config.verticalOffset;
+		} else {
+			// Convert percentage to actual position
+			actualY = (int) ((config.positionY / 100.0f) * (screenHeight - config.achievementHeight));
+		}
+
+		// Apply achievement offset for multiple achievements
+		actualY -= yOffset;
 
 		float slideProgress = achievement.getSlideProgress(currentTick, tickDelta);
-		int x = (int) (screenWidth - (config.achievementWidth + 10) * slideProgress);
-		int y = baseY;
+
+		// Calculate slide animation based on screen position
+		int x, y = actualY;
+
+		if (config.positionX == -1) {
+			// Auto positioning - slide from right
+			x = (int) (screenWidth - (config.achievementWidth + 10) * slideProgress);
+		} else {
+			// Custom positioning - determine slide direction based on screen position
+			float screenCenterX = screenWidth / 2.0f;
+
+			if (actualX < screenCenterX) {
+				// Left side of screen - slide from left
+				x = (int) (actualX - config.achievementWidth + (config.achievementWidth) * slideProgress);
+			} else {
+				// Right side of screen - slide from right
+				x = (int) (actualX + config.achievementWidth - (config.achievementWidth) * slideProgress);
+			}
+		}
 
 		context.fill(x, y, x + config.achievementWidth, y + config.achievementHeight, config.backgroundColor);
 

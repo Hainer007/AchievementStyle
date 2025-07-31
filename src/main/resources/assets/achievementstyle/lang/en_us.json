@@ -34,6 +34,14 @@
   "text.autoconfig.achievementstyle.option.achievementSpacing": "Achievement Spacing",
   "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Space between multiple achievements",
 
+  "text.autoconfig.achievementstyle.option.positionX": "X Position",
+  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "Horizontal position of achievements on screen as percentage from left edge (-1 for automatic positioning)",
+  "text.autoconfig.achievementstyle.option.positionX.auto": "Auto",
+
+  "text.autoconfig.achievementstyle.option.positionY": "Y Position",
+  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "Vertical position of achievements on screen as percentage from top edge (-1 for automatic positioning)",
+  "text.autoconfig.achievementstyle.option.positionY.auto": "Auto",
+
   "text.autoconfig.achievementstyle.option.soundEnabled": "Enable Sound",
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Play sound when achievement appears",
 
