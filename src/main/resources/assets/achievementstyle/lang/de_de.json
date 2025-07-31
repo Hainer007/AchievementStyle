@@ -31,6 +31,17 @@
   "text.autoconfig.achievementstyle.option.enableShineEffect": "Glanz-Effekt aktivieren",
   "text.autoconfig.achievementstyle.option.enableShineEffect.@Tooltip": "Fügt eine subtile Glanz-Animation hinzu",
 
+  "text.autoconfig.achievementstyle.option.positionX": "X-Position",
+  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "Horizontale Position der Erfolge auf dem Bildschirm als Prozentsatz vom linken Rand (-1 für automatische Positionierung)",
+  "text.autoconfig.achievementstyle.option.positionX.auto": "Auto",
+
+  "text.autoconfig.achievementstyle.option.positionY": "Y-Position",
+  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "Vertikale Position der Erfolge auf dem Bildschirm als Prozentsatz vom oberen Rand (-1 für automatische Positionierung)",
+  "text.autoconfig.achievementstyle.option.positionY.auto": "Auto",
+
+  "text.autoconfig.achievementstyle.option.rareBorderColor": "Randfarbe für seltene Erfolge",
+  "text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip": "Farbe des Rahmens für seltene Erfolge.",
+
   "text.autoconfig.achievementstyle.option.achievementSpacing": "Erfolgs-Abstand",
   "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Platz zwischen mehreren Erfolgen",
 

@@ -34,6 +34,17 @@
   "text.autoconfig.achievementstyle.option.achievementSpacing": "実績の間隔",
   "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "複数の実績間のスペース",
 
+  "text.autoconfig.achievementstyle.option.positionX": "X位置",
+  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "画面上の実績の水平位置（左端からのパーセンテージ、-1で自動配置）",
+  "text.autoconfig.achievementstyle.option.positionX.auto": "自動",
+
+  "text.autoconfig.achievementstyle.option.positionY": "Y位置",
+  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "画面上の実績の垂直位置（上端からのパーセンテージ、-1で自動配置）",
+  "text.autoconfig.achievementstyle.option.positionY.auto": "自動",
+
+  "text.autoconfig.achievementstyle.option.rareBorderColor": "レア実績の枠色",
+  "text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip": "レア実績のための枠に使用される色。",
+
   "text.autoconfig.achievementstyle.option.soundEnabled": "サウンドを有効化",
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "実績が表示されたときにサウンドを再生",
 

@@ -21,7 +21,7 @@ public class AchievementConfig {
                     .build())
             .build();
 
-    // Appearance settings
+    // Налаштування зовнішнього вигляду
     @SerialEntry
     public int achievementWidth = 170;
 
@@ -31,14 +31,14 @@ public class AchievementConfig {
     @SerialEntry
     public int verticalOffset = 25;
 
-    // Animation settings
+    // Налаштування анімації
     @SerialEntry
     public int slideDuration = 40;
 
     @SerialEntry
     public int displayDuration = 120;
 
-    // Style settings
+    // Налаштування стилю
     @SerialEntry
     public int backgroundColor = 0xE0000000;
 
@@ -46,19 +46,22 @@ public class AchievementConfig {
     public int borderColor = 0x4A90E2;
 
     @SerialEntry
+    public int rareBorderColor = 0x9B30FF; // Фіолетовий колір для рідкісних досягнень
+
+    @SerialEntry
     public boolean enableShineEffect = true;
 
-    // Position settings
+    // Налаштування позиції
     @SerialEntry
     public int achievementSpacing = 5;
 
     @SerialEntry
-    public int positionX = -1; // -1 means auto (right side)
+    public int positionX = -1;
 
     @SerialEntry
-    public int positionY = -1; // -1 means auto (bottom)
+    public int positionY = -1;
 
-    // Sound settings
+    // Налаштування звуку
     @SerialEntry
     public boolean soundEnabled = true;
 
@@ -112,30 +115,6 @@ public class AchievementConfig {
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
-                        .name(Text.translatable("text.autoconfig.achievementstyle.category.animation"))
-                        .tooltip(Text.translatable("text.autoconfig.achievementstyle.category.animation.tooltip"))
-                        .group(OptionGroup.createBuilder()
-                                .name(Text.translatable("text.autoconfig.achievementstyle.category.animation"))
-                                .collapsed(false)
-                                .option(Option.<Integer>createBuilder()
-                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.slideDuration"))
-                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.slideDuration.@Tooltip")))
-                                        .binding(defaults.slideDuration, () -> config.slideDuration, value -> config.slideDuration = value)
-                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
-                                                .range(10, 100)
-                                                .step(1))
-                                        .build())
-                                .option(Option.<Integer>createBuilder()
-                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.displayDuration"))
-                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.displayDuration.@Tooltip")))
-                                        .binding(defaults.displayDuration, () -> config.displayDuration, value -> config.displayDuration = value)
-                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
-                                                .range(60, 300)
-                                                .step(1))
-                                        .build())
-                                .build())
-                        .build())
-                .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("text.autoconfig.achievementstyle.category.style"))
                         .tooltip(Text.translatable("text.autoconfig.achievementstyle.category.style.tooltip"))
                         .group(OptionGroup.createBuilder()
@@ -156,6 +135,14 @@ public class AchievementConfig {
                                         .binding(new Color(defaults.borderColor),
                                                 () -> new Color(config.borderColor),
                                                 value -> config.borderColor = value.getRGB() & 0xFFFFFF)
+                                        .controller(ColorControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Color>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.rareBorderColor"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip")))
+                                        .binding(new Color(defaults.rareBorderColor),
+                                                () -> new Color(config.rareBorderColor),
+                                                value -> config.rareBorderColor = value.getRGB() & 0xFFFFFF)
                                         .controller(ColorControllerBuilder::create)
                                         .build())
                                 .option(Option.<Boolean>createBuilder()

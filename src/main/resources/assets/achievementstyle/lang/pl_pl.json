@@ -34,6 +34,17 @@
   "text.autoconfig.achievementstyle.option.achievementSpacing": "Odstęp między osiągnięciami",
   "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Przestrzeń między wieloma osiągnięciami",
 
+  "text.autoconfig.achievementstyle.option.positionX": "Pozycja X",
+  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "Pozycja pozioma osiągnięć na ekranie jako procent od lewej krawędzi (-1 dla automatycznego ustawienia)",
+  "text.autoconfig.achievementstyle.option.positionX.auto": "Auto",
+
+  "text.autoconfig.achievementstyle.option.positionY": "Pozycja Y",
+  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "Pozycja pionowa osiągnięć na ekranie jako procent od górnej krawędzi (-1 dla automatycznego ustawienia)",
+  "text.autoconfig.achievementstyle.option.positionY.auto": "Auto",
+
+  "text.autoconfig.achievementstyle.option.rareBorderColor": "Kolor ramki rzadkich osiągnięć",
+  "text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip": "Kolor ramki używanej dla rzadkich osiągnięć.",
+
   "text.autoconfig.achievementstyle.option.soundEnabled": "Włącz dźwięk",
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Odtwarzaj dźwięk gdy pojawi się osiągnięcie",
 

@@ -34,6 +34,17 @@
   "text.autoconfig.achievementstyle.option.achievementSpacing": "Espacement des succès",
   "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Espace entre plusieurs succès",
 
+  "text.autoconfig.achievementstyle.option.positionX": "Position X",
+  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "Position horizontale des succès à l’écran en pourcentage depuis le bord gauche (-1 pour positionnement automatique)",
+  "text.autoconfig.achievementstyle.option.positionX.auto": "Auto",
+
+  "text.autoconfig.achievementstyle.option.positionY": "Position Y",
+  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "Position verticale des succès à l’écran en pourcentage depuis le bord supérieur (-1 pour positionnement automatique)",
+  "text.autoconfig.achievementstyle.option.positionY.auto": "Auto",
+
+  "text.autoconfig.achievementstyle.option.rareBorderColor": "Couleur de la bordure des succès rares",
+  "text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip": "Couleur utilisée pour la bordure des succès rares.",
+
   "text.autoconfig.achievementstyle.option.soundEnabled": "Activer le son",
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Jouer un son quand le succès apparaît",
 

@@ -34,6 +34,17 @@
   "text.autoconfig.achievementstyle.option.achievementSpacing": "Espaciado de logros",
   "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Espacio entre múltiples logros",
 
+  "text.autoconfig.achievementstyle.option.positionX": "Posición X",
+  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "Posición horizontal de los logros en la pantalla como porcentaje desde el borde izquierdo (-1 para posicionamiento automático)",
+  "text.autoconfig.achievementstyle.option.positionX.auto": "Auto",
+
+  "text.autoconfig.achievementstyle.option.positionY": "Posición Y",
+  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "Posición vertical de los logros en la pantalla como porcentaje desde el borde superior (-1 para posicionamiento automático)",
+  "text.autoconfig.achievementstyle.option.positionY.auto": "Auto",
+
+  "text.autoconfig.achievementstyle.option.rareBorderColor": "Color del borde del logro raro",
+  "text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip": "Color del borde utilizado para logros raros.",
+
   "text.autoconfig.achievementstyle.option.soundEnabled": "Habilitar sonido",
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Reproducir sonido cuando aparece el logro",
 

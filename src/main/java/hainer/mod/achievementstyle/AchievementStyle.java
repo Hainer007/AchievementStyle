@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementDisplay;
+import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,6 @@ import java.util.Map;
 public class AchievementStyle implements ClientModInitializer {
 	public static final String MOD_ID = "achievementstyle";
 
-
 	public static final Identifier ACHIEVEMENT_SOUND_ID = Identifier.of(MOD_ID, "achievement_unlock");
 	public static final SoundEvent ACHIEVEMENT_SOUND_EVENT = SoundEvent.of(ACHIEVEMENT_SOUND_ID);
 
@@ -37,16 +37,10 @@ public class AchievementStyle implements ClientModInitializer {
 	public void onInitializeClient() {
 		System.out.println("[" + MOD_ID + "] Steam Style Mod Client initializing...");
 
-
 		Registry.register(Registries.SOUND_EVENT, ACHIEVEMENT_SOUND_ID, ACHIEVEMENT_SOUND_EVENT);
 
 		AchievementConfig.init();
-		// Initialize AchievementConfig
-		AchievementConfig.init();
-
-		// Register KeyBindings
 		KeyBindings.register();
-
 
 		HudRenderCallback.EVENT.register((drawContext, renderTickCounter) -> {
 			renderAchievements(drawContext, 1.0f);
@@ -67,14 +61,16 @@ public class AchievementStyle implements ClientModInitializer {
 
 		AdvancementDisplay display = advancement.display().orElse(null);
 		if (display != null) {
+			boolean isRare = display.getFrame() == AdvancementFrame.CHALLENGE;
+
 			SteamAchievement steamAchievement = new SteamAchievement(
 					display.getTitle(),
 					display.getDescription(),
 					display.getIcon(),
-					tickCounter
+					tickCounter,
+					isRare
 			);
 			activeAchievements.add(steamAchievement);
-
 
 			playAchievementSound();
 
@@ -82,7 +78,7 @@ public class AchievementStyle implements ClientModInitializer {
 		}
 	}
 
-	public static void showCustomAchievement(Text title, Text description, ItemStack icon) {
+	public static void showCustomAchievement(Text title, Text description, ItemStack icon, boolean isRare) {
 		if (title == null) title = Text.literal("Achievement");
 		if (description == null) description = Text.literal("");
 		if (icon == null) icon = new ItemStack(net.minecraft.item.Items.EXPERIENCE_BOTTLE);
@@ -91,10 +87,10 @@ public class AchievementStyle implements ClientModInitializer {
 				title,
 				description,
 				icon,
-				tickCounter
+				tickCounter,
+				isRare
 		);
 		activeAchievements.add(steamAchievement);
-
 
 		playAchievementSound();
 
@@ -132,72 +128,65 @@ public class AchievementStyle implements ClientModInitializer {
 
 	private static void renderSteamAchievement(DrawContext context, SteamAchievement achievement,
 											   int screenWidth, int screenHeight, int yOffset, int currentTick, float tickDelta) {
-
 		AchievementConfig config = AchievementConfig.get();
 
-		// Calculate actual positions based on percentage
 		int actualX, actualY;
 
 		if (config.positionX == -1) {
-			// Auto X positioning - right side
 			actualX = screenWidth - config.achievementWidth - 10;
 		} else {
-			// Convert percentage to actual position
 			actualX = (int) ((config.positionX / 100.0f) * (screenWidth - config.achievementWidth));
 		}
 
 		if (config.positionY == -1) {
-			// Auto Y positioning - bottom with offset
 			actualY = screenHeight - config.achievementHeight - config.verticalOffset;
 		} else {
-			// Convert percentage to actual position
 			actualY = (int) ((config.positionY / 100.0f) * (screenHeight - config.achievementHeight));
 		}
 
-		// Apply achievement offset for multiple achievements
 		actualY -= yOffset;
 
 		float slideProgress = achievement.getSlideProgress(currentTick, tickDelta);
 
-		// Calculate slide animation based on screen position
 		int x, y = actualY;
 
 		if (config.positionX == -1) {
-			// Auto positioning - slide from right
 			x = (int) (screenWidth - (config.achievementWidth + 10) * slideProgress);
 		} else {
-			// Custom positioning - determine slide direction based on screen position
 			float screenCenterX = screenWidth / 2.0f;
 
 			if (actualX < screenCenterX) {
-				// Left side of screen - slide from left
 				x = (int) (actualX - config.achievementWidth + (config.achievementWidth) * slideProgress);
 			} else {
-				// Right side of screen - slide from right
 				x = (int) (actualX + config.achievementWidth - (config.achievementWidth) * slideProgress);
 			}
 		}
 
 		context.fill(x, y, x + config.achievementWidth, y + config.achievementHeight, config.backgroundColor);
 
-		int borderColorWithAlpha = 0xFF000000 | (config.borderColor & 0x00FFFFFF);
+		// Визначаємо колір рамки в залежності від рідкісності
+		int borderColorToUse = achievement.isRare ? config.rareBorderColor : config.borderColor;
+
+		int borderColorWithAlpha = 0xFF000000 | (borderColorToUse & 0x00FFFFFF);
 		context.drawBorder(x, y, config.achievementWidth, config.achievementHeight, borderColorWithAlpha);
 
 		for (int i = 0; i < config.achievementHeight; i++) {
 			int alpha = (int) (30 * (1.0f - (float) i / config.achievementHeight));
-			int red = (config.borderColor >> 16) & 0xFF;
-			int green = (config.borderColor >> 8) & 0xFF;
-			int blue = config.borderColor & 0xFF;
+			int red = (borderColorToUse >> 16) & 0xFF;
+			int green = (borderColorToUse >> 8) & 0xFF;
+			int blue = borderColorToUse & 0xFF;
 			int color = (alpha << 24) | (red << 16) | (green << 8) | blue;
 			context.fill(x + 1, y + i, x + config.achievementWidth - 1, y + i + 1, color);
 		}
 
-		context.getMatrices().pushMatrix();
-		context.getMatrices().translate(x + 6, y + 6);
+		context.getMatrices().push();
+//		context.getMatrices().translate(x + 6, y + 6); // For 1.21.6+
+		context.getMatrices().translate(x + 6, y + 6, 0);
 		float iconScale = Math.min(1.5f, (config.achievementHeight - 12) / 16.0f);
-		context.getMatrices().scale(iconScale, iconScale);
+//		context.getMatrices().scale(iconScale, iconScale); // For 1.21.6+
+		context.getMatrices().scale(iconScale, iconScale, 1.0f);
 		context.drawItem(achievement.icon, 0, 0);
-		context.getMatrices().popMatrix();
+		context.getMatrices().pop();
 
 		MinecraftClient client = MinecraftClient.getInstance();
 
@@ -232,12 +221,14 @@ public class AchievementStyle implements ClientModInitializer {
 		private final Text description;
 		private final ItemStack icon;
 		private final int startTick;
+		private final boolean isRare;
 
-		public SteamAchievement(Text title, @Nullable Text description, ItemStack icon, int startTick) {
+		public SteamAchievement(Text title, @Nullable Text description, ItemStack icon, int startTick, boolean isRare) {
 			this.title = title;
 			this.description = description;
 			this.icon = icon;
 			this.startTick = startTick;
+			this.isRare = isRare;
 		}
 
 		public boolean shouldRemove(int currentTick) {

@@ -36,7 +36,8 @@ public class ToastManagerMixin {
                 AchievementStyle.showCustomAchievement(
                         Text.literal("Achievement Unlocked!"),
                         Text.literal("You've made progress!"),
-                        new net.minecraft.item.ItemStack(net.minecraft.item.Items.EXPERIENCE_BOTTLE)
+                        new net.minecraft.item.ItemStack(net.minecraft.item.Items.EXPERIENCE_BOTTLE),
+                        false
                 );
                 ci.cancel();
             }

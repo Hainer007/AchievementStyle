@@ -71,7 +71,7 @@ public class KeyBindings {
             ItemStack icon = new ItemStack(Items.DIAMOND); // Use diamond as the icon
 
             // Call the method to show a custom achievement
-            AchievementStyle.showCustomAchievement(title, description, icon);
+            AchievementStyle.showCustomAchievement(title, description, icon, false);
         }
     }
 
