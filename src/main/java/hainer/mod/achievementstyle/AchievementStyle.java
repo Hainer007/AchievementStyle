@@ -179,14 +179,14 @@ public class AchievementStyle implements ClientModInitializer {
 			context.fill(x + 1, y + i, x + config.achievementWidth - 1, y + i + 1, color);
 		}
 
-		context.getMatrices().push();
-//		context.getMatrices().translate(x + 6, y + 6); // For 1.21.6+
-		context.getMatrices().translate(x + 6, y + 6, 0);
+		context.getMatrices().pushMatrix();
+		context.getMatrices().translate(x + 6, y + 6); // For 1.21.6+
+//		context.getMatrices().translate(x + 6, y + 6, 0);
 		float iconScale = Math.min(1.5f, (config.achievementHeight - 12) / 16.0f);
-//		context.getMatrices().scale(iconScale, iconScale); // For 1.21.6+
-		context.getMatrices().scale(iconScale, iconScale, 1.0f);
+		context.getMatrices().scale(iconScale, iconScale); // For 1.21.6+
+//		context.getMatrices().scale(iconScale, iconScale, 1.0f);
 		context.drawItem(achievement.icon, 0, 0);
-		context.getMatrices().pop();
+		context.getMatrices().popMatrix();
 
 		MinecraftClient client = MinecraftClient.getInstance();
 
