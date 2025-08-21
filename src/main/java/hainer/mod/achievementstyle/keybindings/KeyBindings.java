@@ -19,34 +19,24 @@ public class KeyBindings {
     private static boolean wasTestPressed = false;
 
     public static void register() {
-        // Create the key binding for opening the configuration
-        configKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.achievementstyle.config", // Localization key
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_I, // Key I
-                "category.achievementstyle.keybindings" // Category in settings
-        ));
+                configKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.achievementstyle.config",                 InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_I,                 "category.achievementstyle.keybindings"         ));
 
-        // Create the key binding for showing a test achievement
-        testAchievementKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.achievementstyle.test", // Localization key
-                InputUtil.Type.KEYSYM,
+                testAchievementKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.achievementstyle.test",                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
-                "category.achievementstyle.keybindings" // Category in settings
-        ));
+                "category.achievementstyle.keybindings"         ));
 
-        // Register the key event handler
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            // Handle config key press
-            if (configKeyBinding.wasPressed() && !wasConfigPressed) {
+                ClientTickEvents.END_CLIENT_TICK.register(client -> {
+                        if (configKeyBinding.wasPressed() && !wasConfigPressed) {
                 wasConfigPressed = true;
                 openConfigScreen();
             } else if (!configKeyBinding.isPressed()) {
                 wasConfigPressed = false;
             }
 
-            // Handle test achievement key press
-            if (testAchievementKeyBinding.wasPressed() && !wasTestPressed) {
+                        if (testAchievementKeyBinding.wasPressed() && !wasTestPressed) {
                 wasTestPressed = true;
                 showTestAchievement();
             } else if (!testAchievementKeyBinding.isPressed()) {
@@ -62,16 +52,14 @@ public class KeyBindings {
         }
     }
 
-    private static void showTestAchievement() {
+    public static void showTestAchievement() {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player != null) {
-            // Create a test achievement
-            Text title = Text.literal("Test Achievement");
+                        Text title = Text.literal("Test Achievement");
             Text description = Text.literal("This is a test achievement!");
             ItemStack icon = new ItemStack(Items.DIAMOND); // Use diamond as the icon
 
-            // Call the method to show a custom achievement
-            AchievementStyle.showCustomAchievement(title, description, icon, false);
+                        AchievementStyle.showCustomAchievement(title, description, icon, false);
         }
     }
 

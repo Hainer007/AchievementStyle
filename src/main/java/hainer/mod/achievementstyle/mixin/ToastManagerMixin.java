@@ -26,14 +26,12 @@ public class ToastManagerMixin {
 
                     AchievementStyle.showAchievement(advancementEntry.value());
 
-                    ci.cancel(); // Cancel vanilla toast
-                }
+                    ci.cancel();                 }
             } catch (Exception e) {
                 System.out.println("[AchievementStyle] Error intercepting advancement: " + e.getMessage());
                 e.printStackTrace();
 
-                // Fallback to generic achievement notification
-                AchievementStyle.showCustomAchievement(
+                                AchievementStyle.showCustomAchievement(
                         Text.literal("Achievement Unlocked!"),
                         Text.literal("You've made progress!"),
                         new net.minecraft.item.ItemStack(net.minecraft.item.Items.EXPERIENCE_BOTTLE),

@@ -33,8 +33,7 @@ public class AchievementStyle implements ClientModInitializer {
 	private static final Map<Identifier, Boolean> completedAchievements = new HashMap<>();
 	private static int tickCounter = 0;
 
-	// Enum для позицій досягнень
-	public enum AchievementPosition {
+		public enum AchievementPosition {
 		BOTTOM_RIGHT("bottom_right"),
 		BOTTOM_LEFT("bottom_left"),
 		TOP_RIGHT("top_right"),
@@ -57,8 +56,7 @@ public class AchievementStyle implements ClientModInitializer {
 			if (ordinal >= 0 && ordinal < values.length) {
 				return values[ordinal];
 			}
-			return BOTTOM_RIGHT; // За замовчуванням
-		}
+			return BOTTOM_RIGHT; 		}
 	}
 
 	@Override
@@ -159,20 +157,16 @@ public class AchievementStyle implements ClientModInitializer {
 		AchievementConfig config = AchievementConfig.get();
 		AchievementPosition position = AchievementPosition.fromOrdinal(config.achievementPosition);
 
-		// Розрахунок базової позиції залежно від вибраної позиції
-		int baseX = calculateBaseX(screenWidth, config.achievementWidth, position);
+				int baseX = calculateBaseX(screenWidth, config.achievementWidth, position);
 		int baseY = calculateBaseY(screenHeight, config.achievementHeight, config.verticalOffset, position);
 
-		// Додавання зміщення для стека досягнень (завжди додаємо стек зміщення до базової позиції)
-		int stackedY = addStackOffset(baseY, stackOffset, position);
+				int stackedY = addStackOffset(baseY, stackOffset, position);
 
-		// Розрахунок анімації
-		float slideProgress = achievement.getSlideProgress(currentTick, tickDelta);
+				float slideProgress = achievement.getSlideProgress(currentTick, tickDelta);
 		int animatedX = calculateAnimatedX(baseX, screenWidth, config.achievementWidth, slideProgress, position);
 		int animatedY = calculateAnimatedY(stackedY, screenHeight, config.achievementHeight, slideProgress, position);
 
-		// Відрисовка досягнення
-		drawAchievementBox(context, config, achievement, animatedX, animatedY);
+				drawAchievementBox(context, config, achievement, animatedX, animatedY);
 		drawAchievementContent(context, config, achievement, animatedX, animatedY);
 	}
 
@@ -212,12 +206,10 @@ public class AchievementStyle implements ClientModInitializer {
 			case BOTTOM_RIGHT:
 			case BOTTOM_LEFT:
 			case BOTTOM_CENTER:
-				return baseY - stackOffset; // Для нижніх позицій - віднімаємо
-			case TOP_RIGHT:
+				return baseY - stackOffset; 			case TOP_RIGHT:
 			case TOP_LEFT:
 			case TOP_CENTER:
-				return baseY + stackOffset; // Для верхніх позицій - додаємо
-			default:
+				return baseY + stackOffset; 			default:
 				return baseY - stackOffset;
 		}
 	}
@@ -226,17 +218,13 @@ public class AchievementStyle implements ClientModInitializer {
 		switch (position) {
 			case BOTTOM_RIGHT:
 			case TOP_RIGHT:
-				// Анімація справа наліво
-				return (int) (screenWidth - (achievementWidth + 10) * slideProgress);
+								return (int) (screenWidth - (achievementWidth + 10) * slideProgress);
 			case BOTTOM_LEFT:
 			case TOP_LEFT:
-				// Анімація зліва направо
-				return (int) (baseX - achievementWidth + achievementWidth * slideProgress);
+								return (int) (baseX - achievementWidth + achievementWidth * slideProgress);
 			case TOP_CENTER:
 			case BOTTOM_CENTER:
-				// Анімація зверху вниз для TOP_CENTER, знизу вгору для BOTTOM_CENTER
-				return baseX; // X залишається незмінним для горизонтально центрованих позицій
-			default:
+								return baseX; 			default:
 				return (int) (screenWidth - (achievementWidth + 10) * slideProgress);
 		}
 	}
@@ -244,27 +232,21 @@ public class AchievementStyle implements ClientModInitializer {
 	private static int calculateAnimatedY(int stackedY, int screenHeight, int achievementHeight, float slideProgress, AchievementPosition position) {
 		switch (position) {
 			case TOP_CENTER:
-				// Анімація зверху вниз - досягнення з'являється з-за верхньої межі екрана
-				return (int) (stackedY - achievementHeight * (1.0f - slideProgress));
+								return (int) (stackedY - achievementHeight * (1.0f - slideProgress));
 			case BOTTOM_CENTER:
-				// Анімація знизу вгору - досягнення з'являється з-за нижньої межі екрана
-				return (int) (stackedY + achievementHeight * (1.0f - slideProgress));
+								return (int) (stackedY + achievementHeight * (1.0f - slideProgress));
 			default:
-				return stackedY; // Для інших позицій Y не анімується
-		}
+				return stackedY; 		}
 	}
 
 	private static void drawAchievementBox(DrawContext context, AchievementConfig config, SteamAchievement achievement, int x, int y) {
-		// Фон
-		context.fill(x, y, x + config.achievementWidth, y + config.achievementHeight, config.backgroundColor);
+				context.fill(x, y, x + config.achievementWidth, y + config.achievementHeight, config.backgroundColor);
 
-		// Рамка
-		int borderColorToUse = achievement.isRare ? config.rareBorderColor : config.borderColor;
+				int borderColorToUse = achievement.isRare ? config.rareBorderColor : config.borderColor;
 		int borderColorWithAlpha = 0xFF000000 | (borderColorToUse & 0x00FFFFFF);
 		context.drawBorder(x, y, config.achievementWidth, config.achievementHeight, borderColorWithAlpha);
 
-		// Градієнт рамки
-		for (int i = 0; i < config.achievementHeight; i++) {
+				for (int i = 0; i < config.achievementHeight; i++) {
 			int alpha = (int) (30 * (1.0f - (float) i / config.achievementHeight));
 			int red = (borderColorToUse >> 16) & 0xFF;
 			int green = (borderColorToUse >> 8) & 0xFF;
@@ -273,10 +255,9 @@ public class AchievementStyle implements ClientModInitializer {
 			context.fill(x + 1, y + i, x + config.achievementWidth - 1, y + i + 1, color);
 		}
 
-		// Ефект блиску
-		if (config.enableShineEffect) {
+				if (config.enableShineEffect) {
 			long time = System.currentTimeMillis();
-			double shine = Math.sin(time * 0.01) * 0.3 + 0.7;
+			double shine = Math.sin(time * 0.005) * 0.3 + 0.7;
 			int shineAlpha = (int) (100 * shine);
 			context.fill(x + config.achievementWidth - 15, y + 3, x + config.achievementWidth - 3, y + 5,
 					(shineAlpha << 24) | 0xFFFFFF);
@@ -284,8 +265,7 @@ public class AchievementStyle implements ClientModInitializer {
 	}
 
 	private static void drawAchievementContent(DrawContext context, AchievementConfig config, SteamAchievement achievement, int x, int y) {
-		// Іконка
-		context.getMatrices().pushMatrix();
+				context.getMatrices().pushMatrix();
 		context.getMatrices().translate(x + 6, y + 6);
 		float iconScale = Math.min(1.5f, (config.achievementHeight - 12) / 16.0f);
 		context.getMatrices().scale(iconScale, iconScale);
@@ -294,13 +274,11 @@ public class AchievementStyle implements ClientModInitializer {
 
 		MinecraftClient client = MinecraftClient.getInstance();
 
-		// Заголовок
-		int titleY = y + Math.max(6, (config.achievementHeight - 24) / 3);
+				int titleY = y + Math.max(6, (config.achievementHeight - 24) / 3);
 		context.drawTextWithShadow(client.textRenderer, achievement.title,
 				x + 32, titleY, 0xFFFFFFFF);
 
-		// Опис
-		Text description = achievement.description;
+				Text description = achievement.description;
 		if (description != null && config.achievementHeight > 30) {
 			String descText = description.getString();
 			if (client.textRenderer.getWidth(descText) > config.achievementWidth - 40) {

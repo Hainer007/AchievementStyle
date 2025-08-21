@@ -21,8 +21,7 @@ public class AchievementConfig {
                     .build())
             .build();
 
-    // Налаштування зовнішнього вигляду
-    @SerialEntry
+        @SerialEntry
     public int achievementWidth = 170;
 
     @SerialEntry
@@ -31,15 +30,13 @@ public class AchievementConfig {
     @SerialEntry
     public int verticalOffset = 25;
 
-    // Налаштування анімації
-    @SerialEntry
+        @SerialEntry
     public int slideDuration = 40;
 
     @SerialEntry
     public int displayDuration = 120;
 
-    // Налаштування стилю
-    @SerialEntry
+        @SerialEntry
     public int backgroundColor = 0xE0000000;
 
     @SerialEntry
@@ -51,15 +48,13 @@ public class AchievementConfig {
     @SerialEntry
     public boolean enableShineEffect = true;
 
-    // Налаштування позиції
-    @SerialEntry
+        @SerialEntry
     public int achievementSpacing = 5;
 
     @SerialEntry
     public int achievementPosition = 0; // 0 = BOTTOM_RIGHT за замовчуванням
 
-    // Налаштування звуку
-    @SerialEntry
+        @SerialEntry
     public boolean soundEnabled = true;
 
     @SerialEntry
