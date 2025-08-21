@@ -37,13 +37,15 @@
   "text.autoconfig.achievementstyle.option.soundEnabled": "Увімкнути звук",
   "text.autoconfig.achievementstyle.option.soundEnabled.@Tooltip": "Відтворювати звук при появі досягнення",
 
-  "text.autoconfig.achievementstyle.option.positionX": "Позиція по X",
-  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "Горизонтальне розташування досягнень на екрані у відсотках від лівого краю (-1 для автоматичного)",
-  "text.autoconfig.achievementstyle.option.positionX.auto": "Авто",
+  "text.autoconfig.achievementstyle.option.achievementPosition": "Позиція сповіщення",
+  "text.autoconfig.achievementstyle.option.achievementPosition.@Tooltip": "Виберіть, де на екрані будуть з’являтися сповіщення про досягнення",
 
-  "text.autoconfig.achievementstyle.option.positionY": "Позиція по Y",
-  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "Вертикальне розташування досягнень на екрані у відсотках від верхнього краю (-1 для автоматичного)",
-  "text.autoconfig.achievementstyle.option.positionY.auto": "Авто",
+  "text.autoconfig.achievementstyle.position.bottom_right": "Внизу праворуч",
+  "text.autoconfig.achievementstyle.position.bottom_left": "Внизу ліворуч",
+  "text.autoconfig.achievementstyle.position.top_right": "Вгорі праворуч",
+  "text.autoconfig.achievementstyle.position.top_left": "Вгорі ліворуч",
+  "text.autoconfig.achievementstyle.position.top_center": "Вгорі по центру",
+  "text.autoconfig.achievementstyle.position.bottom_center": "Внизу по центру",
 
   "text.autoconfig.achievementstyle.option.rareBorderColor": "Колір рамки рідкісного досягнення",
   "text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip": "Колір рамки, що використовується для рідкісних досягнень.",

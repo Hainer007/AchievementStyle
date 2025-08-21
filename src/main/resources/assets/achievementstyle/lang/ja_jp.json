@@ -34,13 +34,15 @@
   "text.autoconfig.achievementstyle.option.achievementSpacing": "実績の間隔",
   "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "複数の実績間のスペース",
 
-  "text.autoconfig.achievementstyle.option.positionX": "X位置",
-  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "画面上の実績の水平位置（左端からのパーセンテージ、-1で自動配置）",
-  "text.autoconfig.achievementstyle.option.positionX.auto": "自動",
+  "text.autoconfig.achievementstyle.option.achievementPosition": "通知の位置",
+  "text.autoconfig.achievementstyle.option.achievementPosition.@Tooltip": "画面上で実績通知を表示する位置を選択してください",
 
-  "text.autoconfig.achievementstyle.option.positionY": "Y位置",
-  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "画面上の実績の垂直位置（上端からのパーセンテージ、-1で自動配置）",
-  "text.autoconfig.achievementstyle.option.positionY.auto": "自動",
+  "text.autoconfig.achievementstyle.position.bottom_right": "右下",
+  "text.autoconfig.achievementstyle.position.bottom_left": "左下",
+  "text.autoconfig.achievementstyle.position.top_right": "右上",
+  "text.autoconfig.achievementstyle.position.top_left": "左上",
+  "text.autoconfig.achievementstyle.position.top_center": "上中央",
+  "text.autoconfig.achievementstyle.position.bottom_center": "下中央",
 
   "text.autoconfig.achievementstyle.option.rareBorderColor": "レア実績の枠色",
   "text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip": "レア実績のための枠に使用される色。",

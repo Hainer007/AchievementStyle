@@ -34,13 +34,15 @@
   "text.autoconfig.achievementstyle.option.achievementSpacing": "Espacement des succès",
   "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Espace entre plusieurs succès",
 
-  "text.autoconfig.achievementstyle.option.positionX": "Position X",
-  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "Position horizontale des succès à l’écran en pourcentage depuis le bord gauche (-1 pour positionnement automatique)",
-  "text.autoconfig.achievementstyle.option.positionX.auto": "Auto",
+  "text.autoconfig.achievementstyle.option.achievementPosition": "Position de la notification",
+  "text.autoconfig.achievementstyle.option.achievementPosition.@Tooltip": "Choisissez où les notifications de succès apparaîtront à l'écran",
 
-  "text.autoconfig.achievementstyle.option.positionY": "Position Y",
-  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "Position verticale des succès à l’écran en pourcentage depuis le bord supérieur (-1 pour positionnement automatique)",
-  "text.autoconfig.achievementstyle.option.positionY.auto": "Auto",
+  "text.autoconfig.achievementstyle.position.bottom_right": "En bas à droite",
+  "text.autoconfig.achievementstyle.position.bottom_left": "En bas à gauche",
+  "text.autoconfig.achievementstyle.position.top_right": "En haut à droite",
+  "text.autoconfig.achievementstyle.position.top_left": "En haut à gauche",
+  "text.autoconfig.achievementstyle.position.top_center": "En haut au centre",
+  "text.autoconfig.achievementstyle.position.bottom_center": "En bas au centre",
 
   "text.autoconfig.achievementstyle.option.rareBorderColor": "Couleur de la bordure des succès rares",
   "text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip": "Couleur utilisée pour la bordure des succès rares.",

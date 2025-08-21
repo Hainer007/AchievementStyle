@@ -34,13 +34,15 @@
   "text.autoconfig.achievementstyle.option.achievementSpacing": "Espaciado de logros",
   "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Espacio entre múltiples logros",
 
-  "text.autoconfig.achievementstyle.option.positionX": "Posición X",
-  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "Posición horizontal de los logros en la pantalla como porcentaje desde el borde izquierdo (-1 para posicionamiento automático)",
-  "text.autoconfig.achievementstyle.option.positionX.auto": "Auto",
+  "text.autoconfig.achievementstyle.option.achievementPosition": "Posición de la notificación",
+  "text.autoconfig.achievementstyle.option.achievementPosition.@Tooltip": "Elige dónde aparecerán las notificaciones de logros en la pantalla",
 
-  "text.autoconfig.achievementstyle.option.positionY": "Posición Y",
-  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "Posición vertical de los logros en la pantalla como porcentaje desde el borde superior (-1 para posicionamiento automático)",
-  "text.autoconfig.achievementstyle.option.positionY.auto": "Auto",
+  "text.autoconfig.achievementstyle.position.bottom_right": "Abajo a la derecha",
+  "text.autoconfig.achievementstyle.position.bottom_left": "Abajo a la izquierda",
+  "text.autoconfig.achievementstyle.position.top_right": "Arriba a la derecha",
+  "text.autoconfig.achievementstyle.position.top_left": "Arriba a la izquierda",
+  "text.autoconfig.achievementstyle.position.top_center": "Arriba en el centro",
+  "text.autoconfig.achievementstyle.position.bottom_center": "Abajo en el centro",
 
   "text.autoconfig.achievementstyle.option.rareBorderColor": "Color del borde del logro raro",
   "text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip": "Color del borde utilizado para logros raros.",

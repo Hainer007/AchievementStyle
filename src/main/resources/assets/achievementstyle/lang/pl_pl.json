@@ -34,13 +34,15 @@
   "text.autoconfig.achievementstyle.option.achievementSpacing": "Odstęp między osiągnięciami",
   "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Przestrzeń między wieloma osiągnięciami",
 
-  "text.autoconfig.achievementstyle.option.positionX": "Pozycja X",
-  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "Pozycja pozioma osiągnięć na ekranie jako procent od lewej krawędzi (-1 dla automatycznego ustawienia)",
-  "text.autoconfig.achievementstyle.option.positionX.auto": "Auto",
+  "text.autoconfig.achievementstyle.option.achievementPosition": "Pozycja powiadomień",
+  "text.autoconfig.achievementstyle.option.achievementPosition.@Tooltip": "Wybierz, gdzie na ekranie będą się pojawiać powiadomienia o osiągnięciach",
 
-  "text.autoconfig.achievementstyle.option.positionY": "Pozycja Y",
-  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "Pozycja pionowa osiągnięć na ekranie jako procent od górnej krawędzi (-1 dla automatycznego ustawienia)",
-  "text.autoconfig.achievementstyle.option.positionY.auto": "Auto",
+  "text.autoconfig.achievementstyle.position.bottom_right": "Na dole po prawej",
+  "text.autoconfig.achievementstyle.position.bottom_left": "Na dole po lewej",
+  "text.autoconfig.achievementstyle.position.top_right": "Na górze po prawej",
+  "text.autoconfig.achievementstyle.position.top_left": "Na górze po lewej",
+  "text.autoconfig.achievementstyle.position.top_center": "Na górze na środku",
+  "text.autoconfig.achievementstyle.position.bottom_center": "Na dole na środku",
 
   "text.autoconfig.achievementstyle.option.rareBorderColor": "Kolor ramki rzadkich osiągnięć",
   "text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip": "Kolor ramki używanej dla rzadkich osiągnięć.",

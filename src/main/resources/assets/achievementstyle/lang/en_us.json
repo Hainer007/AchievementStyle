@@ -34,13 +34,15 @@
   "text.autoconfig.achievementstyle.option.achievementSpacing": "Achievement Spacing",
   "text.autoconfig.achievementstyle.option.achievementSpacing.@Tooltip": "Space between multiple achievements",
 
-  "text.autoconfig.achievementstyle.option.positionX": "X Position",
-  "text.autoconfig.achievementstyle.option.positionX.@Tooltip": "Horizontal position of achievements on screen as percentage from left edge (-1 for automatic positioning)",
-  "text.autoconfig.achievementstyle.option.positionX.auto": "Auto",
+  "text.autoconfig.achievementstyle.option.achievementPosition": "Notification Position",
+  "text.autoconfig.achievementstyle.option.achievementPosition.@Tooltip": "Choose where achievement notifications will appear on the screen",
 
-  "text.autoconfig.achievementstyle.option.positionY": "Y Position",
-  "text.autoconfig.achievementstyle.option.positionY.@Tooltip": "Vertical position of achievements on screen as percentage from top edge (-1 for automatic positioning)",
-  "text.autoconfig.achievementstyle.option.positionY.auto": "Auto",
+  "text.autoconfig.achievementstyle.position.bottom_right": "Bottom Right",
+  "text.autoconfig.achievementstyle.position.bottom_left": "Bottom Left",
+  "text.autoconfig.achievementstyle.position.top_right": "Top Right",
+  "text.autoconfig.achievementstyle.position.top_left": "Top Left",
+  "text.autoconfig.achievementstyle.position.top_center": "Top Center",
+  "text.autoconfig.achievementstyle.position.bottom_center": "Bottom Center",
 
   "text.autoconfig.achievementstyle.option.rareBorderColor": "Rare Achievement Border Color",
   "text.autoconfig.achievementstyle.option.rareBorderColor.@Tooltip": "Color of the border used for rare achievements.",
