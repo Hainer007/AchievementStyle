@@ -16,6 +16,9 @@
   "text.autoconfig.achievementstyle.option.verticalOffset": "Вертикальне зміщення",
   "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Відстань від нижньої частини екрана",
 
+  "text.autoconfig.achievementstyle.option.achievementLimit": "Ліміт показу досягнень",
+  "text.autoconfig.achievementstyle.option.achievementLimit.@Tooltip": "Максимальна кількість досягнень, що одночасно показуються на екрані (від 1 до 10). Нові досягнення з’являються після того, як місце звільниться.",
+
   "text.autoconfig.achievementstyle.option.slideDuration": "Тривалість анімації",
   "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "Скільки часу займає анімація ковзання (у тиках)",
 

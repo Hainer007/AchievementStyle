@@ -16,6 +16,9 @@
   "text.autoconfig.achievementstyle.option.verticalOffset": "Vertikaler Versatz",
   "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Abstand vom unteren Bildschirmrand",
 
+  "text.autoconfig.achievementstyle.option.achievementLimit": "Erfolgs-Limit",
+  "text.autoconfig.achievementstyle.option.achievementLimit.@Tooltip": "Maximale Anzahl der gleichzeitig angezeigten Erfolge (von 1 bis 10). Neue Erfolge erscheinen, sobald Platz frei wird.",
+
   "text.autoconfig.achievementstyle.option.slideDuration": "Gleit-Dauer",
   "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "Wie lange die Gleit-Animation dauert (in Ticks)",
 

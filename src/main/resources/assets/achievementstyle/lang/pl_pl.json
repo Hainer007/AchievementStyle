@@ -16,6 +16,9 @@
   "text.autoconfig.achievementstyle.option.verticalOffset": "Przesunięcie pionowe",
   "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Odległość od dolnej części ekranu",
 
+  "text.autoconfig.achievementstyle.option.achievementLimit": "Limit osiągnięć",
+  "text.autoconfig.achievementstyle.option.achievementLimit.@Tooltip": "Maksymalna liczba osiągnięć wyświetlanych jednocześnie (od 1 do 10). Nowe osiągnięcia pojawią się, gdy zwolni się miejsce.",
+
   "text.autoconfig.achievementstyle.option.slideDuration": "Czas przesuwania",
   "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "Jak długo trwa animacja przesuwania (w tickach)",
 

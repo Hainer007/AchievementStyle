@@ -16,6 +16,9 @@
   "text.autoconfig.achievementstyle.option.verticalOffset": "Décalage vertical",
   "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Distance depuis le bas de l'écran",
 
+  "text.autoconfig.achievementstyle.option.achievementLimit": "Limite de succès",
+  "text.autoconfig.achievementstyle.option.achievementLimit.@Tooltip": "Nombre maximum de succès affichés simultanément à l'écran (de 1 à 10). Les nouveaux succès apparaîtront lorsqu'il y aura de la place.",
+
   "text.autoconfig.achievementstyle.option.slideDuration": "Durée du glissement",
   "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "Combien de temps prend l'animation de glissement (en ticks)",
 

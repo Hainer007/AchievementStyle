@@ -30,10 +30,11 @@ public class AchievementStyle implements ClientModInitializer {
 	public static final SoundEvent ACHIEVEMENT_SOUND_EVENT = SoundEvent.of(ACHIEVEMENT_SOUND_ID);
 
 	private static final List<SteamAchievement> activeAchievements = new ArrayList<>();
+	private static final List<SteamAchievement> pendingAchievements = new ArrayList<>();
 	private static final Map<Identifier, Boolean> completedAchievements = new HashMap<>();
 	private static int tickCounter = 0;
 
-		public enum AchievementPosition {
+	public enum AchievementPosition {
 		BOTTOM_RIGHT("bottom_right"),
 		BOTTOM_LEFT("bottom_left"),
 		TOP_RIGHT("top_right"),
@@ -56,7 +57,8 @@ public class AchievementStyle implements ClientModInitializer {
 			if (ordinal >= 0 && ordinal < values.length) {
 				return values[ordinal];
 			}
-			return BOTTOM_RIGHT; 		}
+			return BOTTOM_RIGHT;
+		}
 	}
 
 	@Override
@@ -85,6 +87,8 @@ public class AchievementStyle implements ClientModInitializer {
 	public static void showAchievement(Advancement advancement) {
 		if (advancement == null) return;
 
+		AchievementConfig config = AchievementConfig.get();
+
 		AdvancementDisplay display = advancement.display().orElse(null);
 		if (display != null) {
 			boolean isRare = display.getFrame() == AdvancementFrame.CHALLENGE;
@@ -96,15 +100,19 @@ public class AchievementStyle implements ClientModInitializer {
 					tickCounter,
 					isRare
 			);
-			activeAchievements.add(steamAchievement);
-
-			playAchievementSound();
-
-			System.out.println("[" + MOD_ID + "] Added Steam achievement: " + display.getTitle().getString());
+						if (activeAchievements.size() >= config.achievementLimit) {
+				pendingAchievements.add(steamAchievement);
+			} else {
+				activeAchievements.add(steamAchievement);
+				playAchievementSound();
+				System.out.println("[" + MOD_ID + "] Added Steam achievement: " + display.getTitle().getString());
+			}
 		}
 	}
 
 	public static void showCustomAchievement(Text title, Text description, ItemStack icon, boolean isRare) {
+		AchievementConfig config = AchievementConfig.get();
+
 		if (title == null) title = Text.literal("Achievement");
 		if (description == null) description = Text.literal("");
 		if (icon == null) icon = new ItemStack(net.minecraft.item.Items.EXPERIENCE_BOTTLE);
@@ -116,11 +124,13 @@ public class AchievementStyle implements ClientModInitializer {
 				tickCounter,
 				isRare
 		);
-		activeAchievements.add(steamAchievement);
-
-		playAchievementSound();
-
-		System.out.println("[" + MOD_ID + "] Added custom AchievementStyle achievement: " + title.getString());
+				if (activeAchievements.size() >= config.achievementLimit) {
+			pendingAchievements.add(steamAchievement);
+		} else {
+			activeAchievements.add(steamAchievement);
+			playAchievementSound();
+			System.out.println("[" + MOD_ID + "] Added custom AchievementStyle achievement: " + title.getString());
+		}
 	}
 
 	private static void playAchievementSound() {
@@ -134,7 +144,15 @@ public class AchievementStyle implements ClientModInitializer {
 	}
 
 	private static void updateAchievements() {
-		activeAchievements.removeIf(achievement -> achievement.shouldRemove(tickCounter));
+		boolean removed = activeAchievements.removeIf(
+				achievement -> achievement.shouldRemove(tickCounter)
+		);
+				AchievementConfig config = AchievementConfig.get();
+		while (activeAchievements.size() < config.achievementLimit && !pendingAchievements.isEmpty()) {
+			SteamAchievement next = pendingAchievements.remove(0);
+			activeAchievements.add(next);
+			playAchievementSound();
+		}
 	}
 
 	private void renderAchievements(DrawContext context, float tickDelta) {
@@ -145,7 +163,9 @@ public class AchievementStyle implements ClientModInitializer {
 		int screenWidth = client.getWindow().getScaledWidth();
 		int screenHeight = client.getWindow().getScaledHeight();
 
-		for (int i = 0; i < activeAchievements.size(); i++) {
+				int renderLimit = config.achievementLimit > 0 && config.achievementLimit <= 10 ? config.achievementLimit : activeAchievements.size();
+
+		for (int i = 0; i < Math.min(renderLimit, activeAchievements.size()); i++) {
 			SteamAchievement achievement = activeAchievements.get(i);
 			int stackOffset = i * (config.achievementHeight + config.achievementSpacing);
 			renderSteamAchievement(context, achievement, screenWidth, screenHeight, stackOffset, tickCounter, tickDelta);
@@ -157,16 +177,16 @@ public class AchievementStyle implements ClientModInitializer {
 		AchievementConfig config = AchievementConfig.get();
 		AchievementPosition position = AchievementPosition.fromOrdinal(config.achievementPosition);
 
-				int baseX = calculateBaseX(screenWidth, config.achievementWidth, position);
+		int baseX = calculateBaseX(screenWidth, config.achievementWidth, position);
 		int baseY = calculateBaseY(screenHeight, config.achievementHeight, config.verticalOffset, position);
 
-				int stackedY = addStackOffset(baseY, stackOffset, position);
+		int stackedY = addStackOffset(baseY, stackOffset, position);
 
-				float slideProgress = achievement.getSlideProgress(currentTick, tickDelta);
+		float slideProgress = achievement.getSlideProgress(currentTick, tickDelta);
 		int animatedX = calculateAnimatedX(baseX, screenWidth, config.achievementWidth, slideProgress, position);
 		int animatedY = calculateAnimatedY(stackedY, screenHeight, config.achievementHeight, slideProgress, position);
 
-				drawAchievementBox(context, config, achievement, animatedX, animatedY);
+		drawAchievementBox(context, config, achievement, animatedX, animatedY);
 		drawAchievementContent(context, config, achievement, animatedX, animatedY);
 	}
 
@@ -206,10 +226,12 @@ public class AchievementStyle implements ClientModInitializer {
 			case BOTTOM_RIGHT:
 			case BOTTOM_LEFT:
 			case BOTTOM_CENTER:
-				return baseY - stackOffset; 			case TOP_RIGHT:
+				return baseY - stackOffset;
+			case TOP_RIGHT:
 			case TOP_LEFT:
 			case TOP_CENTER:
-				return baseY + stackOffset; 			default:
+				return baseY + stackOffset;
+			default:
 				return baseY - stackOffset;
 		}
 	}
@@ -218,13 +240,14 @@ public class AchievementStyle implements ClientModInitializer {
 		switch (position) {
 			case BOTTOM_RIGHT:
 			case TOP_RIGHT:
-								return (int) (screenWidth - (achievementWidth + 10) * slideProgress);
+				return (int) (screenWidth - (achievementWidth + 10) * slideProgress);
 			case BOTTOM_LEFT:
 			case TOP_LEFT:
-								return (int) (baseX - achievementWidth + achievementWidth * slideProgress);
+				return (int) (baseX - achievementWidth + achievementWidth * slideProgress);
 			case TOP_CENTER:
 			case BOTTOM_CENTER:
-								return baseX; 			default:
+				return baseX;
+			default:
 				return (int) (screenWidth - (achievementWidth + 10) * slideProgress);
 		}
 	}
@@ -232,21 +255,22 @@ public class AchievementStyle implements ClientModInitializer {
 	private static int calculateAnimatedY(int stackedY, int screenHeight, int achievementHeight, float slideProgress, AchievementPosition position) {
 		switch (position) {
 			case TOP_CENTER:
-								return (int) (stackedY - achievementHeight * (1.0f - slideProgress));
+				return (int) (stackedY - achievementHeight * (1.0f - slideProgress));
 			case BOTTOM_CENTER:
-								return (int) (stackedY + achievementHeight * (1.0f - slideProgress));
+				return (int) (stackedY + achievementHeight * (1.0f - slideProgress));
 			default:
-				return stackedY; 		}
+				return stackedY;
+		}
 	}
 
 	private static void drawAchievementBox(DrawContext context, AchievementConfig config, SteamAchievement achievement, int x, int y) {
-				context.fill(x, y, x + config.achievementWidth, y + config.achievementHeight, config.backgroundColor);
+		context.fill(x, y, x + config.achievementWidth, y + config.achievementHeight, config.backgroundColor);
 
-				int borderColorToUse = achievement.isRare ? config.rareBorderColor : config.borderColor;
+		int borderColorToUse = achievement.isRare ? config.rareBorderColor : config.borderColor;
 		int borderColorWithAlpha = 0xFF000000 | (borderColorToUse & 0x00FFFFFF);
 		context.drawBorder(x, y, config.achievementWidth, config.achievementHeight, borderColorWithAlpha);
 
-				for (int i = 0; i < config.achievementHeight; i++) {
+		for (int i = 0; i < config.achievementHeight; i++) {
 			int alpha = (int) (30 * (1.0f - (float) i / config.achievementHeight));
 			int red = (borderColorToUse >> 16) & 0xFF;
 			int green = (borderColorToUse >> 8) & 0xFF;
@@ -255,7 +279,7 @@ public class AchievementStyle implements ClientModInitializer {
 			context.fill(x + 1, y + i, x + config.achievementWidth - 1, y + i + 1, color);
 		}
 
-				if (config.enableShineEffect) {
+		if (config.enableShineEffect) {
 			long time = System.currentTimeMillis();
 			double shine = Math.sin(time * 0.005) * 0.3 + 0.7;
 			int shineAlpha = (int) (100 * shine);
@@ -265,7 +289,7 @@ public class AchievementStyle implements ClientModInitializer {
 	}
 
 	private static void drawAchievementContent(DrawContext context, AchievementConfig config, SteamAchievement achievement, int x, int y) {
-				context.getMatrices().pushMatrix();
+		context.getMatrices().pushMatrix();
 		context.getMatrices().translate(x + 6, y + 6);
 		float iconScale = Math.min(1.5f, (config.achievementHeight - 12) / 16.0f);
 		context.getMatrices().scale(iconScale, iconScale);
@@ -274,11 +298,11 @@ public class AchievementStyle implements ClientModInitializer {
 
 		MinecraftClient client = MinecraftClient.getInstance();
 
-				int titleY = y + Math.max(6, (config.achievementHeight - 24) / 3);
+		int titleY = y + Math.max(6, (config.achievementHeight - 24) / 3);
 		context.drawTextWithShadow(client.textRenderer, achievement.title,
 				x + 32, titleY, 0xFFFFFFFF);
 
-				Text description = achievement.description;
+		Text description = achievement.description;
 		if (description != null && config.achievementHeight > 30) {
 			String descText = description.getString();
 			if (client.textRenderer.getWidth(descText) > config.achievementWidth - 40) {

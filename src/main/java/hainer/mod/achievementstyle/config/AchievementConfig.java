@@ -21,7 +21,7 @@ public class AchievementConfig {
                     .build())
             .build();
 
-        @SerialEntry
+    @SerialEntry
     public int achievementWidth = 170;
 
     @SerialEntry
@@ -30,35 +30,38 @@ public class AchievementConfig {
     @SerialEntry
     public int verticalOffset = 25;
 
-        @SerialEntry
+    @SerialEntry
     public int slideDuration = 40;
 
     @SerialEntry
     public int displayDuration = 120;
 
-        @SerialEntry
+    @SerialEntry
     public int backgroundColor = 0xE0000000;
 
     @SerialEntry
     public int borderColor = 0x4A90E2;
 
     @SerialEntry
-    public int rareBorderColor = 0x9B30FF; // Фіолетовий колір для рідкісних досягнень
+    public int rareBorderColor = 0x9B30FF;
 
     @SerialEntry
     public boolean enableShineEffect = true;
 
-        @SerialEntry
+    @SerialEntry
     public int achievementSpacing = 5;
 
     @SerialEntry
     public int achievementPosition = 0; // 0 = BOTTOM_RIGHT за замовчуванням
 
-        @SerialEntry
+    @SerialEntry
     public boolean soundEnabled = true;
 
     @SerialEntry
     public float soundVolume = 0.8f;
+
+        @SerialEntry
+    public int achievementLimit = 3; // стандарт 3, мін 1, макс 10, більше 10 — нескінченно
 
     public static AchievementConfig get() {
         return HANDLER.instance();
@@ -103,6 +106,15 @@ public class AchievementConfig {
                                         .controller(opt -> IntegerSliderControllerBuilder.create(opt)
                                                 .range(0, 100)
                                                 .step(1))
+                                        .build())
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.translatable("text.autoconfig.achievementstyle.option.achievementLimit"))
+                                        .description(OptionDescription.of(Text.translatable("text.autoconfig.achievementstyle.option.achievementLimit.@Tooltip")))
+                                        .binding(defaults.achievementLimit, () -> config.achievementLimit, value -> config.achievementLimit = value)
+                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                                .range(1, 10)
+                                                .step(1)
+                                                .formatValue(value -> Text.literal(Integer.toString(value))))
                                         .build())
                                 .build())
                         .build())

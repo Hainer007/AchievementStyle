@@ -16,6 +16,9 @@
   "text.autoconfig.achievementstyle.option.verticalOffset": "Desplazamiento vertical",
   "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Distancia desde la parte inferior de la pantalla",
 
+  "text.autoconfig.achievementstyle.option.achievementLimit": "Límite de logros",
+  "text.autoconfig.achievementstyle.option.achievementLimit.@Tooltip": "Número máximo de logros mostrados en pantalla al mismo tiempo (de 1 a 10). Los nuevos logros aparecerán cuando haya espacio disponible.",
+
   "text.autoconfig.achievementstyle.option.slideDuration": "Duración del deslizamiento",
   "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "Cuánto tiempo toma la animación de deslizamiento (en ticks)",
 

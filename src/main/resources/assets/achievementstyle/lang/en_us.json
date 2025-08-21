@@ -16,6 +16,9 @@
   "text.autoconfig.achievementstyle.option.verticalOffset": "Vertical Offset",
   "text.autoconfig.achievementstyle.option.verticalOffset.@Tooltip": "Distance from bottom of screen",
 
+  "text.autoconfig.achievementstyle.option.achievementLimit": "Achievement Limit",
+  "text.autoconfig.achievementstyle.option.achievementLimit.@Tooltip": "The maximum number of achievements shown on screen at once (from 1 to 10). New achievements will appear after there is free space.",
+
   "text.autoconfig.achievementstyle.option.slideDuration": "Slide Duration",
   "text.autoconfig.achievementstyle.option.slideDuration.@Tooltip": "How long the slide animation takes (in ticks)",
 
