@@ -64,6 +64,6 @@
 
   "key.achievementstyle.config": "Abrir configuración de estilo de logros",
   "key.achievementstyle.test": "Mostrar logro de prueba",
-  "category.achievementstyle.keybindings": "Achievement Style"
+  "key.category.achievementstyle.keybindings": "Achievement Style"
 
 }
