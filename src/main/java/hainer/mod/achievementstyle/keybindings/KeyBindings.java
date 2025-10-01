@@ -10,6 +10,7 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 public class KeyBindings {
@@ -17,16 +18,24 @@ public class KeyBindings {
     private static KeyBinding testAchievementKeyBinding;
     private static boolean wasConfigPressed = false;
     private static boolean wasTestPressed = false;
+    private static final KeyBinding.Category CATEGORY =
+            KeyBinding.Category.create(Identifier.of("achievementstyle", "keybindings"));
+
 
     public static void register() {
-                configKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.achievementstyle.config",                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_I,                 "category.achievementstyle.keybindings"         ));
+        configKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.achievementstyle.config", // ID для lang
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_I,
+                CATEGORY
+        ));
 
-                testAchievementKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.achievementstyle.test",                 InputUtil.Type.KEYSYM,
+        testAchievementKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.achievementstyle.test",
+                InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
-                "category.achievementstyle.keybindings"         ));
+                CATEGORY
+        ));
 
                 ClientTickEvents.END_CLIENT_TICK.register(client -> {
                         if (configKeyBinding.wasPressed() && !wasConfigPressed) {

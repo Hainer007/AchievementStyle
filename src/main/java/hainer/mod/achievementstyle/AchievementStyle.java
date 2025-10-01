@@ -100,7 +100,7 @@ public class AchievementStyle implements ClientModInitializer {
 					tickCounter,
 					isRare
 			);
-						if (activeAchievements.size() >= config.achievementLimit) {
+			if (activeAchievements.size() >= config.achievementLimit) {
 				pendingAchievements.add(steamAchievement);
 			} else {
 				activeAchievements.add(steamAchievement);
@@ -124,7 +124,7 @@ public class AchievementStyle implements ClientModInitializer {
 				tickCounter,
 				isRare
 		);
-				if (activeAchievements.size() >= config.achievementLimit) {
+		if (activeAchievements.size() >= config.achievementLimit) {
 			pendingAchievements.add(steamAchievement);
 		} else {
 			activeAchievements.add(steamAchievement);
@@ -147,7 +147,8 @@ public class AchievementStyle implements ClientModInitializer {
 		boolean removed = activeAchievements.removeIf(
 				achievement -> achievement.shouldRemove(tickCounter)
 		);
-				AchievementConfig config = AchievementConfig.get();
+
+		AchievementConfig config = AchievementConfig.get();
 		while (activeAchievements.size() < config.achievementLimit && !pendingAchievements.isEmpty()) {
 			SteamAchievement next = pendingAchievements.remove(0);
 			activeAchievements.add(next);
@@ -163,7 +164,7 @@ public class AchievementStyle implements ClientModInitializer {
 		int screenWidth = client.getWindow().getScaledWidth();
 		int screenHeight = client.getWindow().getScaledHeight();
 
-				int renderLimit = config.achievementLimit > 0 && config.achievementLimit <= 10 ? config.achievementLimit : activeAchievements.size();
+		int renderLimit = config.achievementLimit > 0 && config.achievementLimit <= 10 ? config.achievementLimit : activeAchievements.size();
 
 		for (int i = 0; i < Math.min(renderLimit, activeAchievements.size()); i++) {
 			SteamAchievement achievement = activeAchievements.get(i);
@@ -263,20 +264,39 @@ public class AchievementStyle implements ClientModInitializer {
 		}
 	}
 
+	/**
+	 * Малює товсту рамку (2 пікселі)
+	 */
+	private static void drawThickBorder(DrawContext context, int x, int y, int width, int height, int color) {
+		// Up
+		context.fill(x, y, x + width, y + 1, color);
+		// Down
+		context.fill(x, y + height - 1, x + width, y + height, color);
+		// Left
+		context.fill(x, y, x + 1, y + height, color);
+		// Right
+		context.fill(x + width - 1, y, x + width, y + height, color);
+	}
+
 	private static void drawAchievementBox(DrawContext context, AchievementConfig config, SteamAchievement achievement, int x, int y) {
 		context.fill(x, y, x + config.achievementWidth, y + config.achievementHeight, config.backgroundColor);
-
 		int borderColorToUse = achievement.isRare ? config.rareBorderColor : config.borderColor;
-		int borderColorWithAlpha = 0xFF000000 | (borderColorToUse & 0x00FFFFFF);
-		context.drawBorder(x, y, config.achievementWidth, config.achievementHeight, borderColorWithAlpha);
+		int borderColorWithAlpha;
+		if ((borderColorToUse & 0xFF000000) == 0) {
+			borderColorWithAlpha = 0xFF000000 | (borderColorToUse & 0x00FFFFFF);
+		} else {
+			borderColorWithAlpha = borderColorToUse;
+		}
 
-		for (int i = 0; i < config.achievementHeight; i++) {
-			int alpha = (int) (30 * (1.0f - (float) i / config.achievementHeight));
-			int red = (borderColorToUse >> 16) & 0xFF;
-			int green = (borderColorToUse >> 8) & 0xFF;
-			int blue = borderColorToUse & 0xFF;
+		drawThickBorder(context, x, y, config.achievementWidth, config.achievementHeight, borderColorWithAlpha);
+
+		for (int i = 2; i < config.achievementHeight - 2; i++) {
+			int alpha = (int) (30 * (1.0f - (float) (i - 2) / (config.achievementHeight - 4)));
+			int red = (borderColorWithAlpha >> 16) & 0xFF;
+			int green = (borderColorWithAlpha >> 8) & 0xFF;
+			int blue = borderColorWithAlpha & 0xFF;
 			int color = (alpha << 24) | (red << 16) | (green << 8) | blue;
-			context.fill(x + 1, y + i, x + config.achievementWidth - 1, y + i + 1, color);
+			context.fill(x + 2, y + i, x + config.achievementWidth - 2, y + i + 1, color);
 		}
 
 		if (config.enableShineEffect) {
