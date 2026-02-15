@@ -97,14 +97,13 @@ public class AchievementStyle implements ClientModInitializer {
 					display.getTitle(),
 					display.getDescription(),
 					display.getIcon(),
-					tickCounter,
+					-1,
 					isRare
 			);
 			if (activeAchievements.size() >= config.achievementLimit) {
 				pendingAchievements.add(steamAchievement);
 			} else {
-				activeAchievements.add(steamAchievement);
-				playAchievementSound();
+				addActiveAchievement(steamAchievement);
 				System.out.println("[" + MOD_ID + "] Added Steam achievement: " + display.getTitle().getString());
 			}
 		}
@@ -121,16 +120,22 @@ public class AchievementStyle implements ClientModInitializer {
 				title,
 				description,
 				icon,
-				tickCounter,
+				-1,
 				isRare
 		);
 		if (activeAchievements.size() >= config.achievementLimit) {
 			pendingAchievements.add(steamAchievement);
 		} else {
-			activeAchievements.add(steamAchievement);
-			playAchievementSound();
+			addActiveAchievement(steamAchievement);
 			System.out.println("[" + MOD_ID + "] Added custom AchievementStyle achievement: " + title.getString());
 		}
+	}
+
+
+	private static void addActiveAchievement(SteamAchievement achievement) {
+		achievement.activate(tickCounter);
+		activeAchievements.add(achievement);
+		playAchievementSound();
 	}
 
 	private static void playAchievementSound() {
@@ -151,8 +156,7 @@ public class AchievementStyle implements ClientModInitializer {
 		AchievementConfig config = AchievementConfig.get();
 		while (activeAchievements.size() < config.achievementLimit && !pendingAchievements.isEmpty()) {
 			SteamAchievement next = pendingAchievements.remove(0);
-			activeAchievements.add(next);
-			playAchievementSound();
+			addActiveAchievement(next);
 		}
 	}
 
@@ -264,9 +268,7 @@ public class AchievementStyle implements ClientModInitializer {
 		}
 	}
 
-	/**
-	 * Малює товсту рамку (2 пікселі)
-	 */
+
 	private static void drawThickBorder(DrawContext context, int x, int y, int width, int height, int color) {
 		// Up
 		context.fill(x, y, x + width, y + 1, color);
@@ -340,7 +342,7 @@ public class AchievementStyle implements ClientModInitializer {
 		private final Text title;
 		private final Text description;
 		private final ItemStack icon;
-		private final int startTick;
+		private int startTick;
 		private final boolean isRare;
 
 		public SteamAchievement(Text title, @Nullable Text description, ItemStack icon, int startTick, boolean isRare) {
@@ -351,14 +353,20 @@ public class AchievementStyle implements ClientModInitializer {
 			this.isRare = isRare;
 		}
 
+		public void activate(int currentTick) {
+			this.startTick = currentTick;
+		}
+
 		public boolean shouldRemove(int currentTick) {
 			AchievementConfig config = AchievementConfig.get();
+			if (startTick < 0) return false;
 			int elapsed = currentTick - startTick;
 			return elapsed > (config.slideDuration + config.displayDuration + config.slideDuration);
 		}
 
 		public float getSlideProgress(int currentTick, float tickDelta) {
 			AchievementConfig config = AchievementConfig.get();
+			if (startTick < 0) return 0.0f;
 			float elapsed = (currentTick - startTick) + tickDelta;
 
 			if (elapsed < config.slideDuration) {
