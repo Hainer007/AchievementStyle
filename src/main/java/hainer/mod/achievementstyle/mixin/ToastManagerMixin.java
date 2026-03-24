@@ -1,11 +1,11 @@
 package hainer.mod.achievementstyle.mixin;
 
 import hainer.mod.achievementstyle.AchievementStyle;
-import net.minecraft.advancement.AdvancementEntry;
-import net.minecraft.client.toast.AdvancementToast;
-import net.minecraft.client.toast.Toast;
-import net.minecraft.client.toast.ToastManager;
-import net.minecraft.text.Text;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.client.gui.components.toasts.AdvancementToast;
+import net.minecraft.client.gui.components.toasts.Toast;
+import net.minecraft.client.gui.components.toasts.ToastManager;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,11 +14,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ToastManager.class)
 public class ToastManagerMixin {
 
-    @Inject(method = "add", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "addToast", at = @At("HEAD"), cancellable = true)
     private void interceptAdvancementToast(Toast toast, CallbackInfo ci) {
         if (toast instanceof AdvancementToast) {
             try {
-                AdvancementEntry advancementEntry = ((IAdvancementToast)toast).advancement();
+                AdvancementHolder advancementEntry = ((IAdvancementToast)toast).advancement();
 
                 if (advancementEntry != null && advancementEntry.value().display().isPresent()) {
                     System.out.println("[AchievementStyle] Intercepted advancement: " +
@@ -32,9 +32,9 @@ public class ToastManagerMixin {
                 e.printStackTrace();
 
                                 AchievementStyle.showCustomAchievement(
-                        Text.literal("Achievement Unlocked!"),
-                        Text.literal("You've made progress!"),
-                        new net.minecraft.item.ItemStack(net.minecraft.item.Items.EXPERIENCE_BOTTLE),
+                        Component.literal("Achievement Unlocked!"),
+                        Component.literal("You've made progress!"),
+                        new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.EXPERIENCE_BOTTLE),
                         false
                 );
                 ci.cancel();
