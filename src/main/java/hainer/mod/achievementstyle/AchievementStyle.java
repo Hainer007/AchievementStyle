@@ -170,7 +170,7 @@ public class AchievementStyle implements ClientModInitializer {
 
 	private void renderAchievements(GuiGraphicsExtractor context, DeltaTracker tickDelta) {
 		Minecraft client = Minecraft.getInstance();
-		if (client.options.hideGui || activeAchievements.isEmpty()) return;
+		if (client.gui.hud.isHidden() || activeAchievements.isEmpty()) return;
 
 		AchievementConfig config = AchievementConfig.get();
 		int screenWidth = client.getWindow().getGuiScaledWidth();

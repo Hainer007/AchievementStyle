@@ -57,7 +57,7 @@ public class KeyBindings {
     private static void openConfigScreen() {
         Minecraft client = Minecraft.getInstance();
         if (client.player != null) {
-            client.setScreen(AchievementConfig.createConfigScreen(client.screen));
+            client.gui.setScreen(AchievementConfig.createConfigScreen(client.gui.screen()));
         }
     }
 
